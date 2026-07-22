@@ -1,50 +1,206 @@
-from pathlib import Path
-import re
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Wingspro Holidays (Private) Limited — Destination Management, Medical Tourism, Global Holidays.">
+<meta name="keywords" content="Wingspro Holidays, Sri Lanka travel, Medical Tourism Sri Lanka, Outbound travel, Nawaloka Hospital, Inbound tourism">
+<meta name="author" content="Wingspro Holidays">
+<meta property="og:title" content="Wingspro Holidays | Your Trusted Travel Partner">
+<meta property="og:description" content="Creating Memorable Journeys with Professional Excellence across Sri Lanka and Beyond.">
+<meta property="og:type" content="website">
+<meta name="robots" content="index, follow">
+<title>Wingspro Holidays | Sri Lanka Travel, Medical Tourism & Global Holidays</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#C5A35A;--gold-lt:#E9D6A3;--gold-dk:#8F7134;--teal:#1F6F78;--teal-md:#2D8791;--teal-pl:#E8F1F2;--coral:#B66A50;--cream:#F7F5F0;--offwh:#F1EFEA;--dk:#102A43;--mid:#334E68;--muted:#627D98;--nh:72px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;color:var(--dk);background:#FCFBF8;overflow-x:hidden}
+h1,h2,h3,h4{font-family:'Playfair Display',serif}
+img{max-width:100%;height:auto;display:block}
+a{text-decoration:none;color:inherit}
+ul{list-style:none}
+button{font-family:'Inter',sans-serif;cursor:pointer}
 
-src = Path("/mnt/data/wingspro_holidays_professional_v2.html")
-out = Path("/mnt/data/wingspro_holidays_complete_website.html")
+/* NAV */
+nav{position:fixed;top:0;left:0;width:100%;z-index:1000;background:rgba(255,255,255,.96);backdrop-filter:blur(14px);border-bottom:1px solid rgba(201,168,76,.18);height:var(--nh);display:flex;align-items:center;transition:box-shadow .3s}
+nav.scrolled{box-shadow:0 4px 28px rgba(0,0,0,.09)}
+.nav-in{max-width:1300px;margin:0 auto;padding:0 1.5rem;width:100%;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.logo{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--teal);white-space:nowrap;cursor:pointer}
+.logo span{color:var(--gold)}
+.nav-links{display:flex;gap:.05rem;align-items:center;flex-wrap:nowrap}
+.nav-links a{padding:.42rem .6rem;font-size:.78rem;font-weight:500;color:var(--mid);border-radius:6px;transition:all .2s;white-space:nowrap}
+.nav-links a:hover,.nav-links a.active{color:var(--teal);background:var(--teal-pl)}
+.nav-cta{background:var(--gold)!important;color:#fff!important;padding:.44rem 1rem!important;border-radius:8px!important;font-weight:600!important;letter-spacing:.02em}
+.nav-cta:hover{background:var(--gold-dk)!important;box-shadow:0 4px 14px rgba(201,168,76,.4)!important}
+.hbg{display:none;flex-direction:column;gap:5px;padding:4px;border:none;background:none}
+.hbg span{display:block;width:24px;height:2px;background:var(--teal);border-radius:2px}
+.mob{display:none;position:fixed;top:var(--nh);left:0;width:100%;background:#fff;border-bottom:1px solid rgba(201,168,76,.15);z-index:999;padding:1rem 1.5rem;flex-direction:column;gap:.2rem;box-shadow:0 8px 28px rgba(0,0,0,.08)}
+.mob.open{display:flex}
+.mob a{padding:.7rem 0;border-bottom:1px solid rgba(0,0,0,.05);font-size:.92rem;font-weight:500;color:var(--mid);display:flex;align-items:center;gap:.75rem}
+.mob-icon{width:28px;height:28px;border-radius:8px;overflow:hidden;flex:0 0 28px;box-shadow:0 4px 12px rgba(16,42,67,.12)}
+.mob-icon img{width:100%;height:100%;object-fit:cover;display:block}
 
-html = src.read_text(encoding="utf-8")
+/* PAGES */
+.page{display:none}.page.active{display:block}
 
-# ---------- NAVIGATION ----------
-new_nav_links = """
-    <div class="nav-links">
-      <a href="javascript:void(0)" onclick="go('home')" class="active" id="n-home">Home</a>
-      <a href="javascript:void(0)" onclick="go('srilanka')" id="n-srilanka">Sri Lanka</a>
-      <a href="javascript:void(0)" onclick="go('intl')" id="n-intl">International</a>
-      <a href="javascript:void(0)" onclick="go('guide')" id="n-guide">Travel Guide</a>
-      <a href="javascript:void(0)" onclick="go('medical')" id="n-medical">Medical Tourism</a>
-      <a href="javascript:void(0)" onclick="go('umrah')" id="n-umrah">Umrah</a>
-      <a href="javascript:void(0)" onclick="go('about')" id="n-about">About</a>
-      <a href="javascript:void(0)" onclick="go('reviews')" id="n-reviews">Reviews</a>
-      <a href="javascript:void(0)" onclick="go('contact')" class="nav-cta" id="n-contact">Contact</a>
-    </div>
-"""
-html = re.sub(
-    r'<div class="nav-links">.*?</div>\s*<button class="hbg"',
-    new_nav_links + '    <button class="hbg"',
-    html,
-    flags=re.S
-)
+/* HERO */
+.hero{min-height:100vh;position:relative;display:flex;align-items:center;overflow:hidden;background:#081C2C}
+.hbg2{position:absolute;inset:0;background-size:cover;background-position:center;opacity:.4;transform:scale(1.06);transition:transform 9s ease,opacity 1.2s ease}
+.hbg2.loaded{transform:scale(1);opacity:.45}
+.hgrad{position:absolute;inset:0;background:linear-gradient(135deg,rgba(31,111,120,.62)0%,rgba(8,28,44,.84)100%)}
+.hcnt{position:relative;z-index:2;max-width:1300px;margin:0 auto;padding:calc(var(--nh)+4rem) 2rem 4rem}
+.ey{display:inline-flex;align-items:center;gap:.5rem;background:rgba(201,168,76,.2);border:1px solid rgba(201,168,76,.45);color:var(--gold-lt);font-size:.73rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:.38rem 1rem;border-radius:20px;margin-bottom:1.5rem}
+.hero h1{font-size:clamp(2.6rem,6.5vw,5.2rem);color:#fff;line-height:1.08;margin-bottom:1.5rem}
+.hero h1 em{font-style:italic;color:var(--gold-lt)}
+.hsub{font-size:clamp(.95rem,1.8vw,1.2rem);color:rgba(255,255,255,.8);max-width:560px;line-height:1.75;margin-bottom:2.5rem;font-weight:300}
+.hbtns{display:flex;gap:1rem;flex-wrap:wrap}
+.bgold{display:inline-flex;align-items:center;gap:.5rem;background:var(--gold);color:#fff;padding:.85rem 1.9rem;border-radius:8px;font-weight:600;font-size:.88rem;border:none;transition:all .25s}
+.bgold:hover{background:var(--gold-dk);transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,168,76,.45)}
+.bgh{display:inline-flex;align-items:center;gap:.5rem;background:transparent;color:#fff;padding:.85rem 1.9rem;border-radius:8px;font-weight:600;font-size:.88rem;border:2px solid rgba(255,255,255,.45);transition:all .25s}
+.bgh:hover{background:rgba(255,255,255,.1);border-color:#fff}
+.scroll-h{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.4rem;color:rgba(255,255,255,.45);font-size:.68rem;letter-spacing:.12em;animation:nudge 2.2s ease infinite}
+.scroll-h::after{content:'';width:1px;height:36px;background:rgba(255,255,255,.3)}
+@keyframes nudge{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-6px)}}
 
-new_mobile = """
-<div class="mob" id="mob">
-  <a href="javascript:void(0)" onclick="go('home')"><span class="mob-icon"><img src="https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=120&auto=format&fit=crop&q=80" alt="Home"></span><span>Home</span></a>
-  <a href="javascript:void(0)" onclick="go('srilanka')"><span class="mob-icon"><img src="https://images.unsplash.com/photo-1586613835348-1f6fd12f73a5?w=120&auto=format&fit=crop&q=80" alt="Sri Lanka"></span><span>Sri Lanka Destinations</span></a>
-  <a href="javascript:void(0)" onclick="go('intl')"><span class="mob-icon"><img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=120&auto=format&fit=crop&q=80" alt="International destinations"></span><span>International Destinations</span></a>
-  <a href="javascript:void(0)" onclick="go('guide')"><span class="mob-icon"><img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=120&auto=format&fit=crop&q=80" alt="Travel guide"></span><span>Travel Guide</span></a>
-  <a href="javascript:void(0)" onclick="go('medical')"><span class="mob-icon"><img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=120&auto=format&fit=crop&q=80" alt="Medical tourism"></span><span>Medical Tourism</span></a>
-  <a href="javascript:void(0)" onclick="go('umrah')"><span class="mob-icon"><img src="https://images.unsplash.com/photo-1565552645632-d725f8bfc19a?w=120&auto=format&fit=crop&q=80" alt="Umrah"></span><span>Umrah</span></a>
-  <a href="javascript:void(0)" onclick="go('about')"><span class="mob-icon"><img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=120&auto=format&fit=crop&q=80" alt="About us"></span><span>About Us</span></a>
-  <a href="javascript:void(0)" onclick="go('reviews')"><span class="mob-icon"><img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=120&auto=format&fit=crop&q=80" alt="Testimonials"></span><span>Testimonials</span></a>
-  <a href="javascript:void(0)" onclick="go('contact')"><span class="mob-icon"><img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=120&auto=format&fit=crop&q=80" alt="Contact"></span><span>Contact</span></a>
-</div>
-"""
-html = re.sub(r'<div class="mob" id="mob">.*?</div>\s*\n\s*<!-- ===== HOME ===== -->',
-              new_mobile + '\n<!-- ===== HOME ===== -->', html, flags=re.S)
+/* STRIP */
+.strip{background:var(--teal)}
+.strip-in{max-width:1300px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr))}
+.si{padding:1.65rem 1.2rem;text-align:center;border-right:1px solid rgba(255,255,255,.1);cursor:pointer;transition:background .2s}
+.si:last-child{border-right:none}
+.si:hover{background:rgba(255,255,255,.07)}
+.si-ico{width:58px;height:58px;margin:0 auto .7rem;border-radius:16px;overflow:hidden;border:2px solid rgba(255,255,255,.24);box-shadow:0 8px 20px rgba(0,0,0,.14)}
+.si-ico img{width:100%;height:100%;object-fit:cover}
+.icon-img{width:100%;height:100%;object-fit:cover}
+.wico{overflow:hidden;padding:0}
+.wico img{width:100%;height:100%;object-fit:cover}
+.mfico{width:58px;height:58px;border-radius:14px;overflow:hidden;margin-bottom:.9rem;box-shadow:0 8px 18px rgba(16,42,67,.12)}
+.mfico img{width:100%;height:100%;object-fit:cover}
+.cico{overflow:hidden;padding:0}
+.cico img{width:100%;height:100%;object-fit:cover}
+.si h4{color:#fff;font-size:.82rem;font-weight:600;font-family:'Inter',sans-serif}
+.si p{color:rgba(255,255,255,.58);font-size:.72rem;margin-top:.15rem}
 
-# ---------- ADDITIONAL CSS ----------
-extra_css = """
+/* SECTIONS */
+section{padding:5.5rem 2rem}
+.cnt{max-width:1300px;margin:0 auto}
+.slbl{font-size:.7rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-dk);margin-bottom:.65rem;display:inline-flex;align-items:center;gap:.55rem}.slbl::before{content:'';width:26px;height:2px;background:var(--gold)}
+.stit{font-size:clamp(1.72rem,3.5vw,2.65rem);color:var(--dk);line-height:1.18;margin-bottom:.85rem}
+.ssub{font-size:.98rem;color:var(--muted);line-height:1.75;max-width:535px}
+.sh{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:2.75rem;gap:2rem;flex-wrap:wrap}
+
+/* CARDS */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:1.65rem}
+.card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 8px 28px rgba(16,42,67,.10);transition:transform .32s,box-shadow .32s}
+.card:hover{transform:translateY(-7px);box-shadow:0 18px 46px rgba(16,42,67,.16)}
+.cimg{height:210px;overflow:hidden;position:relative}
+.cimg img{width:100%;height:100%;object-fit:cover;transition:transform .55s}
+.card:hover .cimg img{transform:scale(1.07)}
+.cbadge{position:absolute;top:.85rem;left:.85rem;background:var(--gold);color:#fff;font-size:.63rem;font-weight:700;padding:.26rem .68rem;border-radius:12px;text-transform:uppercase;letter-spacing:.06em}
+.cbody{padding:1.35rem 1.45rem}
+.cbody h3{font-size:1.12rem;margin-bottom:.42rem;color:var(--dk)}
+.cbody p{font-size:.83rem;color:var(--muted);line-height:1.65;margin-bottom:1.15rem}
+.cft{display:flex;justify-content:space-between;align-items:center}
+.ccta{font-size:.77rem;color:var(--gold);font-weight:700;cursor:pointer}
+.ccta::after{content:' \2192'}
+
+/* WHY */
+.wgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(205px,1fr));gap:1.65rem;margin-top:2.75rem}
+.wi{text-align:center;padding:1.85rem 1.35rem;border-radius:16px;background:#fff;border:1.5px solid rgba(201,168,76,.14);transition:all .3s}
+.wi:hover{border-color:var(--gold);box-shadow:0 8px 28px rgba(201,168,76,.12);transform:translateY(-4px)}
+.wico{width:56px;height:56px;background:var(--teal-pl);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:1.4rem}
+.wi h4{font-size:.93rem;margin-bottom:.42rem;color:var(--dk)}
+.wi p{font-size:.8rem;color:var(--muted);line-height:1.62}
+
+/* PARALLAX */
+.par{height:380px;background-attachment:fixed;background-size:cover;background-position:center;position:relative;display:flex;align-items:center;justify-content:center}
+.pov{position:absolute;inset:0;background:rgba(14,110,117,.64)}
+.pcnt{position:relative;z-index:2;text-align:center;padding:2rem}
+.pcnt h2{color:#fff;font-size:clamp(1.65rem,4vw,2.9rem);margin-bottom:.85rem}
+.pcnt p{color:rgba(255,255,255,.78);font-size:1.05rem;max-width:520px;margin:0 auto}
+
+/* CONTACT */
+.cwrap{display:grid;grid-template-columns:1fr 1.25fr;gap:4rem;align-items:start}
+.cdet{display:flex;gap:.85rem;margin-bottom:1.35rem;align-items:flex-start}
+.cico{width:42px;height:42px;min-width:42px;background:var(--teal-pl);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+.cdet h4{font-size:.76rem;color:var(--muted);font-weight:400;margin-bottom:.18rem}
+.cdet p{font-size:.9rem;color:var(--dk);font-weight:500}
+.fcard{background:#fff;border-radius:20px;padding:2.3rem;box-shadow:0 8px 38px rgba(0,0,0,.09)}
+.fg{margin-bottom:1.1rem}
+.fg label{display:block;font-size:.76rem;font-weight:600;color:var(--mid);margin-bottom:.36rem;letter-spacing:.03em}
+.fg input,.fg select,.fg textarea{width:100%;padding:.7rem .95rem;border:1.5px solid #E2E8F0;border-radius:10px;font-family:'Inter',sans-serif;font-size:.87rem;color:var(--dk);background:#fff;outline:none;transition:border-color .2s,box-shadow .2s}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(14,110,117,.1)}
+.fg textarea{min-height:118px;resize:vertical}
+.fg2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.bsub{width:100%;padding:.86rem;background:var(--teal);color:#fff;border:none;border-radius:8px;font-size:.93rem;font-weight:600;transition:all .25s;margin-top:.25rem}
+.bsub:hover{background:#0a555b;transform:translateY(-2px);box-shadow:0 8px 24px rgba(14,110,117,.35)}
+.okmsg{display:none;background:var(--teal-pl);border-radius:10px;padding:.88rem 1.2rem;color:var(--teal);font-weight:500;margin-top:.85rem;font-size:.88rem}
+
+/* PAGE HERO */
+.ph{height:360px;position:relative;display:flex;align-items:center;overflow:hidden;margin-top:var(--nh)}
+.phbg{position:absolute;inset:0;background-size:cover;background-position:center}
+.phov{position:absolute;inset:0;background:linear-gradient(135deg,rgba(14,110,117,.72),rgba(22,33,62,.75))}
+.phcnt{position:relative;z-index:2;max-width:1300px;margin:0 auto;padding:0 2rem;width:100%}
+.phcnt h1{color:#fff;font-size:clamp(1.95rem,4vw,3.3rem);margin-bottom:.65rem}
+.phcnt p{color:rgba(255,255,255,.75);font-size:1rem;max-width:490px}
+.bc{font-size:.76rem;color:rgba(255,255,255,.55);margin-bottom:.85rem}
+.bc span{color:var(--gold-lt)}
+
+/* MEDICAL */
+.mgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:1.45rem;margin:2.65rem 0}
+.mf{border-radius:14px;padding:1.6rem;background:#fff;border:1.5px solid rgba(14,110,117,.12);transition:all .25s}
+.mf:hover{border-color:var(--teal);box-shadow:0 6px 22px rgba(14,110,117,.1)}
+.mfico{font-size:1.65rem;margin-bottom:.85rem}
+.mf h4{font-size:.93rem;margin-bottom:.42rem}
+.mf p{font-size:.8rem;color:var(--muted);line-height:1.62}
+
+/* ABOUT */
+.agrid{display:grid;grid-template-columns:1fr 1fr;gap:4.5rem;align-items:center}
+.imain{border-radius:20px;overflow:hidden;height:460px}
+.imain img{width:100%;height:100%;object-fit:cover}
+
+/* CTA BAND */
+.ctaband{background:var(--gold);padding:4.5rem 2rem;text-align:center}
+.ctaband h2{color:#fff;margin-bottom:.85rem;font-size:clamp(1.65rem,3vw,2.35rem)}
+.ctaband p{color:rgba(255,255,255,.85);font-size:.98rem;max-width:470px;margin:0 auto 1.85rem}
+.bwh{display:inline-flex;align-items:center;gap:.5rem;background:#fff;color:var(--gold);padding:.82rem 1.9rem;border-radius:8px;font-weight:700;font-size:.9rem;border:none;transition:all .25s}
+.bwh:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(0,0,0,.14)}
+
+/* FOOTER */
+footer{background:var(--dk);color:#fff;padding:4rem 2rem 2rem}
+.fin{max-width:1300px;margin:0 auto;display:grid;grid-template-columns:1.5fr repeat(3,1fr);gap:3rem;margin-bottom:2.5rem}
+.fbl{font-family:'Playfair Display',serif;font-size:1.38rem;font-weight:700;color:var(--gold-lt);margin-bottom:.85rem}
+.fbl span{color:#fff}
+.fbrand p{font-size:.81rem;color:rgba(255,255,255,.48);line-height:1.7;margin-bottom:1.35rem}
+.fc h4{font-family:'Inter',sans-serif;font-size:.76rem;font-weight:700;color:rgba(255,255,255,.86);letter-spacing:.09em;text-transform:uppercase;margin-bottom:1.05rem}
+.fc li{margin-bottom:.52rem}
+.fc li a{font-size:.81rem;color:rgba(255,255,255,.48);transition:color .2s}
+.fc li a:hover{color:var(--gold-lt)}
+.fbot{border-top:1px solid rgba(255,255,255,.08);padding-top:1.35rem;max-width:1300px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.fbot p{font-size:.76rem;color:rgba(255,255,255,.36)}
+
+/* REVEAL */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+.rv.vis{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+
+/* RESPONSIVE */
+@media(max-width:960px){
+  .cwrap{grid-template-columns:1fr;gap:2.2rem}
+  .agrid{grid-template-columns:1fr}
+  .fin{grid-template-columns:1fr 1fr}
+}
+@media(max-width:640px){
+  section{padding:3.5rem 1.2rem}
+  .nav-links{display:none}
+  .hbg{display:flex}
+  .fg2{grid-template-columns:1fr}
+  .fin{grid-template-columns:1fr}
+  .par{background-attachment:scroll}
+}
+
 /* COMPLETE WEBSITE EXTENSIONS */
 .hero .hcnt{max-width:760px;margin-left:max(2rem,calc((100vw - 1300px)/2));margin-right:auto}
 .hero-mini-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2rem;max-width:760px}
@@ -107,11 +263,47 @@ extra_css = """
   .info-copy{padding:3.5rem 1.2rem}
   .dest-tile{height:230px}
 }
-"""
-html = html.replace("</style>", extra_css + "\n</style>")
 
-# ---------- HOME PAGE ----------
-home = r"""
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-in">
+    <div class="logo" onclick="go('home')">Wingspro<span>Holidays</span></div>
+    
+    <div class="nav-links">
+      <a href="javascript:void(0)" onclick="go('home')" class="active" id="n-home">Home</a>
+      <a href="javascript:void(0)" onclick="go('srilanka')" id="n-srilanka">Sri Lanka</a>
+      <a href="javascript:void(0)" onclick="go('intl')" id="n-intl">International</a>
+      <a href="javascript:void(0)" onclick="go('guide')" id="n-guide">Travel Guide</a>
+      <a href="javascript:void(0)" onclick="go('medical')" id="n-medical">Medical Tourism</a>
+      <a href="javascript:void(0)" onclick="go('umrah')" id="n-umrah">Umrah</a>
+      <a href="javascript:void(0)" onclick="go('about')" id="n-about">About</a>
+      <a href="javascript:void(0)" onclick="go('reviews')" id="n-reviews">Reviews</a>
+      <a href="javascript:void(0)" onclick="go('contact')" class="nav-cta" id="n-contact">Contact</a>
+    </div>
+    <button class="hbg" onclick="toggleMob()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mob" id="mob">
+  <a href="javascript:void(0)" onclick="go('home')"><span class="mob-icon"><img src="https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=120&auto=format&fit=crop&q=80" alt="Home"></span><span>Home</span></a>
+  <a href="javascript:void(0)" onclick="go('srilanka')"><span class="mob-icon"><img src="https://images.unsplash.com/photo-1586613835348-1f6fd12f73a5?w=120&auto=format&fit=crop&q=80" alt="Sri Lanka"></span><span>Sri Lanka Destinations</span></a>
+  <a href="javascript:void(0)" onclick="go('intl')"><span class="mob-icon"><img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=120&auto=format&fit=crop&q=80" alt="International destinations"></span><span>International Destinations</span></a>
+  <a href="javascript:void(0)" onclick="go('guide')"><span class="mob-icon"><img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=120&auto=format&fit=crop&q=80" alt="Travel guide"></span><span>Travel Guide</span></a>
+  <a href="javascript:void(0)" onclick="go('medical')"><span class="mob-icon"><img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=120&auto=format&fit=crop&q=80" alt="Medical tourism"></span><span>Medical Tourism</span></a>
+  <a href="javascript:void(0)" onclick="go('umrah')"><span class="mob-icon"><img src="https://images.unsplash.com/photo-1565552645632-d725f8bfc19a?w=120&auto=format&fit=crop&q=80" alt="Umrah"></span><span>Umrah</span></a>
+  <a href="javascript:void(0)" onclick="go('about')"><span class="mob-icon"><img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=120&auto=format&fit=crop&q=80" alt="About us"></span><span>About Us</span></a>
+  <a href="javascript:void(0)" onclick="go('reviews')"><span class="mob-icon"><img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=120&auto=format&fit=crop&q=80" alt="Testimonials"></span><span>Testimonials</span></a>
+  <a href="javascript:void(0)" onclick="go('contact')"><span class="mob-icon"><img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=120&auto=format&fit=crop&q=80" alt="Contact"></span><span>Contact</span></a>
+</div>
+
+<!-- ===== HOME ===== -->
+
 <div id="p-home" class="page active">
   <div class="hero">
     <div class="hbg2" id="hbg2" style="background-image:url('https://images.unsplash.com/photo-1586613835348-1f6fd12f73a5?w=1800&auto=format&fit=crop&q=82')"></div>
@@ -171,14 +363,9 @@ home = r"""
 
   <div class="ctaband"><h2>Ready to Start Your Journey?</h2><p>Tell us where you want to go and our team will build the right travel plan for you.</p><button class="bwh" onclick="go('contact')">Request a Free Consultation</button></div>
 </div>
-"""
 
-# Replace home page block
-html = re.sub(r'<div id="p-home" class="page active">.*?<!-- ===== SRI LANKA \(INBOUND\) ===== -->',
-              home + '\n<!-- ===== SRI LANKA (INBOUND) ===== -->', html, flags=re.S)
+<!-- ===== SRI LANKA (INBOUND) ===== -->
 
-# ---------- SRI LANKA PAGE ----------
-srilanka = r"""
 <div id="p-srilanka" class="page">
   <div class="ph"><div class="phbg" style="background-image:url('https://images.unsplash.com/photo-1586613835348-1f6fd12f73a5?w=1800&auto=format&fit=crop&q=82')"></div><div class="phov"></div>
   <div class="phcnt"><div class="bc">Home › <span>Sri Lanka</span></div><h1>Sri Lanka Destination Management</h1><p>Authentic journeys across culture, heritage, wildlife, beaches, mountains and local hospitality.</p></div></div>
@@ -204,7 +391,7 @@ srilanka = r"""
       <div class="dest-tile rv"><img src="https://images.unsplash.com/photo-1586613835348-1f6fd12f73a5?w=700&auto=format&fit=crop&q=80" alt="Sigiriya"><div><h3>Sigiriya</h3><p>Ancient rock fortress</p></div></div>
       <div class="dest-tile rv d1"><img src="https://images.unsplash.com/photo-1546708973-b339540b5162?w=700&auto=format&fit=crop&q=80" alt="Kandy"><div><h3>Kandy</h3><p>Culture and heritage</p></div></div>
       <div class="dest-tile rv d2"><img src="https://images.unsplash.com/photo-1591017403286-fd8493524e1e?w=700&auto=format&fit=crop&q=80" alt="Ella"><div><h3>Ella</h3><p>Mountains and tea country</p></div></div>
-      <div class="dest-tile rv d3"><img src="https://images.unsplash.com/photo-1604922824961-d00f8cd5e60b?w=700&auto=format&fit=crop&q=80" alt="Yala"><div><h3>Yala</h3><p>Wildlife safari</p></div></div>
+      <div class="dest-tile rv d3"><img src="https://images.unsplash.com/photo-1516426122078-c23e76319801?w=700&auto=format&fit=crop&q=80" alt="Yala"><div><h3>Yala</h3><p>Wildlife safari</p></div></div>
       <div class="dest-tile rv"><img src="https://images.unsplash.com/photo-1540202404-a2f29016b523?w=700&auto=format&fit=crop&q=80" alt="Galle"><div><h3>Galle</h3><p>Fort and coastal charm</p></div></div>
       <div class="dest-tile rv d1"><img src="https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?w=700&auto=format&fit=crop&q=80" alt="Mirissa"><div><h3>Mirissa</h3><p>Beach and whale watching</p></div></div>
       <div class="dest-tile rv d2"><img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=700&auto=format&fit=crop&q=80" alt="Nuwara Eliya"><div><h3>Nuwara Eliya</h3><p>Cool climate and tea estates</p></div></div>
@@ -213,12 +400,9 @@ srilanka = r"""
   </div></section>
   <div class="ctaband"><h2>Plan Your Sri Lanka Holiday</h2><p>Choose your destinations and let us create a personalized island itinerary.</p><button class="bwh" onclick="go('contact')">Build My Sri Lanka Tour</button></div>
 </div>
-"""
-html = re.sub(r'<div id="p-srilanka" class="page">.*?<!-- ===== INTERNATIONAL / OUTBOUND ===== -->',
-              srilanka + '\n<!-- ===== INTERNATIONAL / OUTBOUND ===== -->', html, flags=re.S)
 
-# ---------- INTERNATIONAL PAGE ----------
-intl = r"""
+<!-- ===== INTERNATIONAL / OUTBOUND ===== -->
+
 <div id="p-intl" class="page">
   <div class="ph"><div class="phbg" style="background-image:url('https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=1800&auto=format&fit=crop&q=82')"></div><div class="phov"></div>
   <div class="phcnt"><div class="bc">Home › <span>International</span></div><h1>International Travel Destinations</h1><p>Customized holidays, honeymoon escapes, group tours and corporate journeys across the world.</p></div></div>
@@ -239,12 +423,9 @@ intl = r"""
   </div></section>
   <div class="ctaband"><h2>Your Next Destination Awaits</h2><p>Tell us where you want to travel and we will prepare a complete itinerary.</p><button class="bwh" onclick="go('contact')">Request an International Package</button></div>
 </div>
-"""
-html = re.sub(r'<div id="p-intl" class="page">.*?<!-- ===== MEDICAL TOURISM ===== -->',
-              intl + '\n<!-- ===== MEDICAL TOURISM ===== -->', html, flags=re.S)
 
-# ---------- MEDICAL PAGE ----------
-medical = r"""
+<!-- ===== MEDICAL TOURISM ===== -->
+
 <div id="p-medical" class="page">
   <div class="ph"><div class="phbg" style="background-image:url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1800&auto=format&fit=crop&q=82')"></div><div class="phov"></div>
   <div class="phcnt"><div class="bc">Home › <span>Medical Tourism</span></div><h1>Medical Tourism in Sri Lanka</h1><p>Comfortable, affordable and coordinated healthcare travel from arrival to recovery.</p></div></div>
@@ -271,12 +452,9 @@ medical = r"""
   </div></section>
   <div class="ctaband"><h2>Start Your Medical Journey</h2><p>Share your travel and appointment requirements with our support team.</p><button class="bwh" onclick="go('contact')">Request Medical Travel Assistance</button></div>
 </div>
-"""
-html = re.sub(r'<div id="p-medical" class="page">.*?<!-- ===== ABOUT ===== -->',
-              medical + '\n<!-- ===== ABOUT ===== -->', html, flags=re.S)
 
-# ---------- ABOUT PAGE ----------
-about = r"""
+<!-- ===== ABOUT ===== -->
+
 <div id="p-about" class="page">
   <div class="ph"><div class="phbg" style="background-image:url('https://images.unsplash.com/photo-1540202404-a2f29016b523?w=1800&auto=format&fit=crop&q=82')"></div><div class="phov"></div>
   <div class="phcnt"><div class="bc">Home › <span>About Us</span></div><h1>About Wingspro Holidays</h1><p>A Sri Lanka-based travel and destination management company serving local and international travelers.</p></div></div>
@@ -306,13 +484,8 @@ about = r"""
     </div>
   </div></section>
 </div>
-"""
-html = re.sub(r'<div id="p-about" class="page">.*?<!-- ===== CONTACT ===== -->',
-              about + '\n<!-- ===== CONTACT ===== -->', html, flags=re.S)
 
-# ---------- NEW GUIDE, UMRAH, REVIEWS ----------
-insert_point = '<!-- ===== CONTACT ===== -->'
-new_pages = r"""
+
 <!-- ===== TRAVEL GUIDE ===== -->
 <div id="p-guide" class="page">
   <div class="ph"><div class="phbg" style="background-image:url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1800&auto=format&fit=crop&q=82')"></div><div class="phov"></div>
@@ -370,21 +543,41 @@ new_pages = r"""
   <div class="ctaband"><h2>Travel with Confidence</h2><p>Let our team build a journey designed around your needs.</p><button class="bwh" onclick="go('contact')">Start Planning</button></div>
 </div>
 
-"""
-html = html.replace(insert_point, new_pages + insert_point)
+<!-- ===== CONTACT ===== -->
+<div id="p-contact" class="page">
+  <div class="ph"><div class="phbg" style="background-image:url('https://images.unsplash.com/photo-1423666639041-f56000c27a9a?w=1600&auto=format&fit=crop&q=75')"></div><div class="phov"></div>
+  <div class="phcnt"><div class="bc">Home &#8250; <span>Contact Us</span></div><h1>Contact Wingspro Holidays</h1><p>Speak with our team about Sri Lanka holidays, international travel, medical tourism or Umrah.</p></div></div>
+  <section style="background:var(--cream)"><div class="cnt">
+    <div class="cwrap">
+      <div class="rv">
+        <div class="slbl">Contact Information</div>
+        <h2 class="stit">We'd Love to Hear From You</h2>
+        <p style="color:var(--muted);line-height:1.75;margin:1rem 0 1.9rem">Contact Wingspro Holidays (Private) Limited for all your travel needs.</p>
+        <div class="cdet"><div class="cico"><img src="https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=150&auto=format&fit=crop&q=80" alt="Office location"></div><div><h4>Office Address</h4><p>55/3, Broadway, Kawdana, Dehiwala, Colombo, Sri Lanka</p></div></div>
+        <div class="cdet"><div class="cico"><img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=150&auto=format&fit=crop&q=80" alt="Phone and WhatsApp contact"></div><div><h4>Phone &amp; WhatsApp</h4><p>+94 777 974 276</p></div></div>
+        <div class="cdet"><div class="cico"><img src="https://images.unsplash.com/photo-1596526131083-e8c633c948d2?w=150&auto=format&fit=crop&q=80" alt="Email contact"></div><div><h4>Email</h4><p>sales@wingsproholidays.com</p></div></div>
+      </div>
+      <div class="rv d2">
+        <div class="fcard">
+          <h3 style="margin-bottom:1.55rem;font-size:1.32rem">Send Us a Message</h3>
+          <div class="fg2">
+            <div class="fg"><label>First Name</label><input id="firstName" name="firstName" type="text" placeholder="John" autocomplete="given-name" required></div>
+            <div class="fg"><label>Last Name</label><input id="lastName" name="lastName" type="text" placeholder="Doe" autocomplete="family-name" required></div>
+          </div>
+          <div class="fg"><label>Email Address</label><input id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required></div>
+          <div class="fg"><label>Phone / WhatsApp</label><input id="phone" name="phone" type="tel" placeholder="+94 77 000 0000" autocomplete="tel" required></div>
+          <div class="fg"><label>Type of Travel</label><select id="travelType" name="travelType" required><option value="">&#8212; Select a Category &#8212;</option><option>Sri Lanka Destination Management</option><option>Outbound Travel</option><option>Medical Tourism</option><option>Umrah</option><option>Travel Guide Consultation</option></select></div>
+          <div class="fg"><label>Your Message</label><textarea id="message" name="message" placeholder="Tell us about your trip..." required></textarea></div>
+          <button class="bsub" type="button" onclick="submitForm()">Send Enquiry &#10022;</button>
+          <div class="okmsg" id="okmsg">&#9989; Thank you! We'll reply shortly.</div>
+        </div>
+      </div>
+    </div>
+  </div></section>
+</div>
 
-# ---------- CONTACT PAGE IMPROVEMENTS ----------
-html = html.replace(
-    '<h1>Get In Touch</h1><p>Your Gateway to Sri Lanka and the World.</p>',
-    '<h1>Contact Wingspro Holidays</h1><p>Speak with our team about Sri Lanka holidays, international travel, medical tourism or Umrah.</p>'
-)
-html = html.replace(
-    '<option>Medical Tourism</option></select>',
-    '<option>Medical Tourism</option><option>Umrah</option><option>Travel Guide Consultation</option></select>'
-)
+<!-- FOOTER -->
 
-# ---------- FOOTER ----------
-footer_new = """
 <footer>
   <div class="fin">
     <div class="fbrand">
@@ -400,10 +593,70 @@ footer_new = """
     <p>55/3, Broadway, Kawdana, Dehiwala, Colombo, Sri Lanka</p>
   </div>
 </footer>
-"""
-html = re.sub(r'<footer>.*?</footer>', footer_new, html, flags=re.S)
 
-out.write_text(html, encoding="utf-8")
 
-print(f"Created: {out}")
-print(f"Size: {out.stat().st_size:,} bytes")
+<script>
+function go(id){
+  var mobileMenu=document.getElementById('mob');
+  if(mobileMenu)mobileMenu.classList.remove('open');
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('p-'+id).classList.add('active');
+  document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));
+  var el=document.getElementById('n-'+id);
+  if(el)el.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  setTimeout(initRv,80);
+  return false;
+}
+function toggleMob(){document.getElementById('mob').classList.toggle('open')}
+window.addEventListener('scroll',function(){document.getElementById('nav').classList.toggle('scrolled',scrollY>50)});
+window.addEventListener('load',function(){var b=document.getElementById('hbg2');if(b)setTimeout(function(){b.classList.add('loaded')},120)});
+function initRv(){
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target)}});
+  },{threshold:.1,rootMargin:'0px 0px -35px 0px'});
+  document.querySelectorAll('.rv').forEach(function(el){el.classList.remove('vis');obs.observe(el)});
+}
+function submitForm(){
+  var fields=['firstName','lastName','email','phone','travelType','message'];
+  var valid=true;
+
+  fields.forEach(function(id){
+    var field=document.getElementById(id);
+    if(!field || !field.checkValidity()){
+      valid=false;
+      if(field)field.reportValidity();
+    }
+  });
+
+  if(!valid)return;
+
+  var firstName=document.getElementById('firstName').value.trim();
+  var lastName=document.getElementById('lastName').value.trim();
+  var email=document.getElementById('email').value.trim();
+  var phone=document.getElementById('phone').value.trim();
+  var travelType=document.getElementById('travelType').value;
+  var message=document.getElementById('message').value.trim();
+
+  var subject=encodeURIComponent('Travel enquiry from '+firstName+' '+lastName);
+  var body=encodeURIComponent(
+    'Name: '+firstName+' '+lastName+'\n'+
+    'Email: '+email+'\n'+
+    'Phone / WhatsApp: '+phone+'\n'+
+    'Type of Travel: '+travelType+'\n\n'+
+    'Message:\n'+message
+  );
+
+  window.location.href='mailto:sales@wingsproholidays.com?subject='+subject+'&body='+body;
+
+  var m=document.getElementById('okmsg');
+  m.textContent='✅ Your email application has been opened. Please review and send your enquiry.';
+  m.style.display='block';
+  setTimeout(function(){m.style.display='none'},7000);
+}
+document.getElementById('year').textContent=new Date().getFullYear();
+initRv();
+setTimeout(initRv,350);
+</script>
+</body>
+</html>
