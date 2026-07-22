@@ -1,513 +1,409 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Wingspro Holidays (Private) Limited — Destination Management, Medical Tourism, Global Holidays.">
-<meta name="keywords" content="Wingspro Holidays, Sri Lanka travel, Medical Tourism Sri Lanka, Outbound travel, Nawaloka Hospital, Inbound tourism">
-<meta name="author" content="Wingspro Holidays">
-<meta property="og:title" content="Wingspro Holidays | Your Trusted Travel Partner">
-<meta property="og:description" content="Creating Memorable Journeys with Professional Excellence across Sri Lanka and Beyond.">
-<meta property="og:type" content="website">
-<meta name="robots" content="index, follow">
-<title>Wingspro Holidays | Sri Lanka Travel, Medical Tourism & Global Holidays</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-:root{--gold:#C5A35A;--gold-lt:#E9D6A3;--gold-dk:#8F7134;--teal:#1F6F78;--teal-md:#2D8791;--teal-pl:#E8F1F2;--coral:#B66A50;--cream:#F7F5F0;--offwh:#F1EFEA;--dk:#102A43;--mid:#334E68;--muted:#627D98;--nh:72px}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:'Inter',sans-serif;color:var(--dk);background:#FCFBF8;overflow-x:hidden}
-h1,h2,h3,h4{font-family:'Playfair Display',serif}
-img{max-width:100%;height:auto;display:block}
-a{text-decoration:none;color:inherit}
-ul{list-style:none}
-button{font-family:'Inter',sans-serif;cursor:pointer}
+from pathlib import Path
+import re
 
-/* NAV */
-nav{position:fixed;top:0;left:0;width:100%;z-index:1000;background:rgba(255,255,255,.96);backdrop-filter:blur(14px);border-bottom:1px solid rgba(201,168,76,.18);height:var(--nh);display:flex;align-items:center;transition:box-shadow .3s}
-nav.scrolled{box-shadow:0 4px 28px rgba(0,0,0,.09)}
-.nav-in{max-width:1300px;margin:0 auto;padding:0 1.5rem;width:100%;display:flex;align-items:center;justify-content:space-between;gap:1rem}
-.logo{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--teal);white-space:nowrap;cursor:pointer}
-.logo span{color:var(--gold)}
-.nav-links{display:flex;gap:.05rem;align-items:center;flex-wrap:nowrap}
-.nav-links a{padding:.42rem .6rem;font-size:.78rem;font-weight:500;color:var(--mid);border-radius:6px;transition:all .2s;white-space:nowrap}
-.nav-links a:hover,.nav-links a.active{color:var(--teal);background:var(--teal-pl)}
-.nav-cta{background:var(--gold)!important;color:#fff!important;padding:.44rem 1rem!important;border-radius:8px!important;font-weight:600!important;letter-spacing:.02em}
-.nav-cta:hover{background:var(--gold-dk)!important;box-shadow:0 4px 14px rgba(201,168,76,.4)!important}
-.hbg{display:none;flex-direction:column;gap:5px;padding:4px;border:none;background:none}
-.hbg span{display:block;width:24px;height:2px;background:var(--teal);border-radius:2px}
-.mob{display:none;position:fixed;top:var(--nh);left:0;width:100%;background:#fff;border-bottom:1px solid rgba(201,168,76,.15);z-index:999;padding:1rem 1.5rem;flex-direction:column;gap:.2rem;box-shadow:0 8px 28px rgba(0,0,0,.08)}
-.mob.open{display:flex}
-.mob a{padding:.7rem 0;border-bottom:1px solid rgba(0,0,0,.05);font-size:.92rem;font-weight:500;color:var(--mid);display:flex;align-items:center;gap:.75rem}
-.mob-icon{width:28px;height:28px;border-radius:8px;overflow:hidden;flex:0 0 28px;box-shadow:0 4px 12px rgba(16,42,67,.12)}
-.mob-icon img{width:100%;height:100%;object-fit:cover;display:block}
+src = Path("/mnt/data/wingspro_holidays_professional_v2.html")
+out = Path("/mnt/data/wingspro_holidays_complete_website.html")
 
-/* PAGES */
-.page{display:none}.page.active{display:block}
+html = src.read_text(encoding="utf-8")
 
-/* HERO */
-.hero{min-height:100vh;position:relative;display:flex;align-items:center;overflow:hidden;background:#081C2C}
-.hbg2{position:absolute;inset:0;background-size:cover;background-position:center;opacity:.4;transform:scale(1.06);transition:transform 9s ease,opacity 1.2s ease}
-.hbg2.loaded{transform:scale(1);opacity:.45}
-.hgrad{position:absolute;inset:0;background:linear-gradient(135deg,rgba(31,111,120,.62)0%,rgba(8,28,44,.84)100%)}
-.hcnt{position:relative;z-index:2;max-width:1300px;margin:0 auto;padding:calc(var(--nh)+4rem) 2rem 4rem}
-.ey{display:inline-flex;align-items:center;gap:.5rem;background:rgba(201,168,76,.2);border:1px solid rgba(201,168,76,.45);color:var(--gold-lt);font-size:.73rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:.38rem 1rem;border-radius:20px;margin-bottom:1.5rem}
-.hero h1{font-size:clamp(2.6rem,6.5vw,5.2rem);color:#fff;line-height:1.08;margin-bottom:1.5rem}
-.hero h1 em{font-style:italic;color:var(--gold-lt)}
-.hsub{font-size:clamp(.95rem,1.8vw,1.2rem);color:rgba(255,255,255,.8);max-width:560px;line-height:1.75;margin-bottom:2.5rem;font-weight:300}
-.hbtns{display:flex;gap:1rem;flex-wrap:wrap}
-.bgold{display:inline-flex;align-items:center;gap:.5rem;background:var(--gold);color:#fff;padding:.85rem 1.9rem;border-radius:8px;font-weight:600;font-size:.88rem;border:none;transition:all .25s}
-.bgold:hover{background:var(--gold-dk);transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,168,76,.45)}
-.bgh{display:inline-flex;align-items:center;gap:.5rem;background:transparent;color:#fff;padding:.85rem 1.9rem;border-radius:8px;font-weight:600;font-size:.88rem;border:2px solid rgba(255,255,255,.45);transition:all .25s}
-.bgh:hover{background:rgba(255,255,255,.1);border-color:#fff}
-.scroll-h{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.4rem;color:rgba(255,255,255,.45);font-size:.68rem;letter-spacing:.12em;animation:nudge 2.2s ease infinite}
-.scroll-h::after{content:'';width:1px;height:36px;background:rgba(255,255,255,.3)}
-@keyframes nudge{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-6px)}}
-
-/* STRIP */
-.strip{background:var(--teal)}
-.strip-in{max-width:1300px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr))}
-.si{padding:1.65rem 1.2rem;text-align:center;border-right:1px solid rgba(255,255,255,.1);cursor:pointer;transition:background .2s}
-.si:last-child{border-right:none}
-.si:hover{background:rgba(255,255,255,.07)}
-.si-ico{width:58px;height:58px;margin:0 auto .7rem;border-radius:16px;overflow:hidden;border:2px solid rgba(255,255,255,.24);box-shadow:0 8px 20px rgba(0,0,0,.14)}
-.si-ico img{width:100%;height:100%;object-fit:cover}
-.icon-img{width:100%;height:100%;object-fit:cover}
-.wico{overflow:hidden;padding:0}
-.wico img{width:100%;height:100%;object-fit:cover}
-.mfico{width:58px;height:58px;border-radius:14px;overflow:hidden;margin-bottom:.9rem;box-shadow:0 8px 18px rgba(16,42,67,.12)}
-.mfico img{width:100%;height:100%;object-fit:cover}
-.cico{overflow:hidden;padding:0}
-.cico img{width:100%;height:100%;object-fit:cover}
-.si h4{color:#fff;font-size:.82rem;font-weight:600;font-family:'Inter',sans-serif}
-.si p{color:rgba(255,255,255,.58);font-size:.72rem;margin-top:.15rem}
-
-/* SECTIONS */
-section{padding:5.5rem 2rem}
-.cnt{max-width:1300px;margin:0 auto}
-.slbl{font-size:.7rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-dk);margin-bottom:.65rem;display:inline-flex;align-items:center;gap:.55rem}.slbl::before{content:'';width:26px;height:2px;background:var(--gold)}
-.stit{font-size:clamp(1.72rem,3.5vw,2.65rem);color:var(--dk);line-height:1.18;margin-bottom:.85rem}
-.ssub{font-size:.98rem;color:var(--muted);line-height:1.75;max-width:535px}
-.sh{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:2.75rem;gap:2rem;flex-wrap:wrap}
-
-/* CARDS */
-.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:1.65rem}
-.card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 8px 28px rgba(16,42,67,.10);transition:transform .32s,box-shadow .32s}
-.card:hover{transform:translateY(-7px);box-shadow:0 18px 46px rgba(16,42,67,.16)}
-.cimg{height:210px;overflow:hidden;position:relative}
-.cimg img{width:100%;height:100%;object-fit:cover;transition:transform .55s}
-.card:hover .cimg img{transform:scale(1.07)}
-.cbadge{position:absolute;top:.85rem;left:.85rem;background:var(--gold);color:#fff;font-size:.63rem;font-weight:700;padding:.26rem .68rem;border-radius:12px;text-transform:uppercase;letter-spacing:.06em}
-.cbody{padding:1.35rem 1.45rem}
-.cbody h3{font-size:1.12rem;margin-bottom:.42rem;color:var(--dk)}
-.cbody p{font-size:.83rem;color:var(--muted);line-height:1.65;margin-bottom:1.15rem}
-.cft{display:flex;justify-content:space-between;align-items:center}
-.ccta{font-size:.77rem;color:var(--gold);font-weight:700;cursor:pointer}
-.ccta::after{content:' \2192'}
-
-/* WHY */
-.wgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(205px,1fr));gap:1.65rem;margin-top:2.75rem}
-.wi{text-align:center;padding:1.85rem 1.35rem;border-radius:16px;background:#fff;border:1.5px solid rgba(201,168,76,.14);transition:all .3s}
-.wi:hover{border-color:var(--gold);box-shadow:0 8px 28px rgba(201,168,76,.12);transform:translateY(-4px)}
-.wico{width:56px;height:56px;background:var(--teal-pl);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:1.4rem}
-.wi h4{font-size:.93rem;margin-bottom:.42rem;color:var(--dk)}
-.wi p{font-size:.8rem;color:var(--muted);line-height:1.62}
-
-/* PARALLAX */
-.par{height:380px;background-attachment:fixed;background-size:cover;background-position:center;position:relative;display:flex;align-items:center;justify-content:center}
-.pov{position:absolute;inset:0;background:rgba(14,110,117,.64)}
-.pcnt{position:relative;z-index:2;text-align:center;padding:2rem}
-.pcnt h2{color:#fff;font-size:clamp(1.65rem,4vw,2.9rem);margin-bottom:.85rem}
-.pcnt p{color:rgba(255,255,255,.78);font-size:1.05rem;max-width:520px;margin:0 auto}
-
-/* CONTACT */
-.cwrap{display:grid;grid-template-columns:1fr 1.25fr;gap:4rem;align-items:start}
-.cdet{display:flex;gap:.85rem;margin-bottom:1.35rem;align-items:flex-start}
-.cico{width:42px;height:42px;min-width:42px;background:var(--teal-pl);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem}
-.cdet h4{font-size:.76rem;color:var(--muted);font-weight:400;margin-bottom:.18rem}
-.cdet p{font-size:.9rem;color:var(--dk);font-weight:500}
-.fcard{background:#fff;border-radius:20px;padding:2.3rem;box-shadow:0 8px 38px rgba(0,0,0,.09)}
-.fg{margin-bottom:1.1rem}
-.fg label{display:block;font-size:.76rem;font-weight:600;color:var(--mid);margin-bottom:.36rem;letter-spacing:.03em}
-.fg input,.fg select,.fg textarea{width:100%;padding:.7rem .95rem;border:1.5px solid #E2E8F0;border-radius:10px;font-family:'Inter',sans-serif;font-size:.87rem;color:var(--dk);background:#fff;outline:none;transition:border-color .2s,box-shadow .2s}
-.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(14,110,117,.1)}
-.fg textarea{min-height:118px;resize:vertical}
-.fg2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-.bsub{width:100%;padding:.86rem;background:var(--teal);color:#fff;border:none;border-radius:8px;font-size:.93rem;font-weight:600;transition:all .25s;margin-top:.25rem}
-.bsub:hover{background:#0a555b;transform:translateY(-2px);box-shadow:0 8px 24px rgba(14,110,117,.35)}
-.okmsg{display:none;background:var(--teal-pl);border-radius:10px;padding:.88rem 1.2rem;color:var(--teal);font-weight:500;margin-top:.85rem;font-size:.88rem}
-
-/* PAGE HERO */
-.ph{height:360px;position:relative;display:flex;align-items:center;overflow:hidden;margin-top:var(--nh)}
-.phbg{position:absolute;inset:0;background-size:cover;background-position:center}
-.phov{position:absolute;inset:0;background:linear-gradient(135deg,rgba(14,110,117,.72),rgba(22,33,62,.75))}
-.phcnt{position:relative;z-index:2;max-width:1300px;margin:0 auto;padding:0 2rem;width:100%}
-.phcnt h1{color:#fff;font-size:clamp(1.95rem,4vw,3.3rem);margin-bottom:.65rem}
-.phcnt p{color:rgba(255,255,255,.75);font-size:1rem;max-width:490px}
-.bc{font-size:.76rem;color:rgba(255,255,255,.55);margin-bottom:.85rem}
-.bc span{color:var(--gold-lt)}
-
-/* MEDICAL */
-.mgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:1.45rem;margin:2.65rem 0}
-.mf{border-radius:14px;padding:1.6rem;background:#fff;border:1.5px solid rgba(14,110,117,.12);transition:all .25s}
-.mf:hover{border-color:var(--teal);box-shadow:0 6px 22px rgba(14,110,117,.1)}
-.mfico{font-size:1.65rem;margin-bottom:.85rem}
-.mf h4{font-size:.93rem;margin-bottom:.42rem}
-.mf p{font-size:.8rem;color:var(--muted);line-height:1.62}
-
-/* ABOUT */
-.agrid{display:grid;grid-template-columns:1fr 1fr;gap:4.5rem;align-items:center}
-.imain{border-radius:20px;overflow:hidden;height:460px}
-.imain img{width:100%;height:100%;object-fit:cover}
-
-/* CTA BAND */
-.ctaband{background:var(--gold);padding:4.5rem 2rem;text-align:center}
-.ctaband h2{color:#fff;margin-bottom:.85rem;font-size:clamp(1.65rem,3vw,2.35rem)}
-.ctaband p{color:rgba(255,255,255,.85);font-size:.98rem;max-width:470px;margin:0 auto 1.85rem}
-.bwh{display:inline-flex;align-items:center;gap:.5rem;background:#fff;color:var(--gold);padding:.82rem 1.9rem;border-radius:8px;font-weight:700;font-size:.9rem;border:none;transition:all .25s}
-.bwh:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(0,0,0,.14)}
-
-/* FOOTER */
-footer{background:var(--dk);color:#fff;padding:4rem 2rem 2rem}
-.fin{max-width:1300px;margin:0 auto;display:grid;grid-template-columns:1.5fr repeat(3,1fr);gap:3rem;margin-bottom:2.5rem}
-.fbl{font-family:'Playfair Display',serif;font-size:1.38rem;font-weight:700;color:var(--gold-lt);margin-bottom:.85rem}
-.fbl span{color:#fff}
-.fbrand p{font-size:.81rem;color:rgba(255,255,255,.48);line-height:1.7;margin-bottom:1.35rem}
-.fc h4{font-family:'Inter',sans-serif;font-size:.76rem;font-weight:700;color:rgba(255,255,255,.86);letter-spacing:.09em;text-transform:uppercase;margin-bottom:1.05rem}
-.fc li{margin-bottom:.52rem}
-.fc li a{font-size:.81rem;color:rgba(255,255,255,.48);transition:color .2s}
-.fc li a:hover{color:var(--gold-lt)}
-.fbot{border-top:1px solid rgba(255,255,255,.08);padding-top:1.35rem;max-width:1300px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
-.fbot p{font-size:.76rem;color:rgba(255,255,255,.36)}
-
-/* REVEAL */
-.rv{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
-.rv.vis{opacity:1;transform:translateY(0)}
-.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
-
-/* RESPONSIVE */
-@media(max-width:960px){
-  .cwrap{grid-template-columns:1fr;gap:2.2rem}
-  .agrid{grid-template-columns:1fr}
-  .fin{grid-template-columns:1fr 1fr}
-}
-@media(max-width:640px){
-  section{padding:3.5rem 1.2rem}
-  .nav-links{display:none}
-  .hbg{display:flex}
-  .fg2{grid-template-columns:1fr}
-  .fin{grid-template-columns:1fr}
-  .par{background-attachment:scroll}
-}
-</style>
-</head>
-<body>
-
-<!-- NAV -->
-<nav id="nav">
-  <div class="nav-in">
-    <div class="logo" onclick="go('home')">Wingspro<span>Holidays</span></div>
+# ---------- NAVIGATION ----------
+new_nav_links = """
     <div class="nav-links">
       <a href="javascript:void(0)" onclick="go('home')" class="active" id="n-home">Home</a>
       <a href="javascript:void(0)" onclick="go('srilanka')" id="n-srilanka">Sri Lanka</a>
-      <a href="javascript:void(0)" onclick="go('intl')" id="n-intl">Global Holidays</a>
+      <a href="javascript:void(0)" onclick="go('intl')" id="n-intl">International</a>
+      <a href="javascript:void(0)" onclick="go('guide')" id="n-guide">Travel Guide</a>
       <a href="javascript:void(0)" onclick="go('medical')" id="n-medical">Medical Tourism</a>
-      <a href="javascript:void(0)" onclick="go('about')" id="n-about">About Us</a>
-      <a href="javascript:void(0)" onclick="go('contact')" id="n-contact">Contact</a>
-      <a href="javascript:void(0)" onclick="go('contact')" class="nav-cta">Book Now</a>
+      <a href="javascript:void(0)" onclick="go('umrah')" id="n-umrah">Umrah</a>
+      <a href="javascript:void(0)" onclick="go('about')" id="n-about">About</a>
+      <a href="javascript:void(0)" onclick="go('reviews')" id="n-reviews">Reviews</a>
+      <a href="javascript:void(0)" onclick="go('contact')" class="nav-cta" id="n-contact">Contact</a>
     </div>
-    <button class="hbg" onclick="toggleMob()" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</nav>
-<div class="mob" id="mob">
-  <a href="javascript:void(0)" onclick="go('home');toggleMob()"><span class="mob-icon"><img src="https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=120&auto=format&fit=crop&q=80" alt="Home"></span><span>Home</span></a>
-  <a href="javascript:void(0)" onclick="go('srilanka');toggleMob()"><span class="mob-icon"><img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=120&auto=format&fit=crop&q=80" alt="Sri Lanka"></span><span>Sri Lanka</span></a>
-  <a href="javascript:void(0)" onclick="go('intl');toggleMob()"><span class="mob-icon"><img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=120&auto=format&fit=crop&q=80" alt="Global Holidays"></span><span>Global Holidays</span></a>
-  <a href="javascript:void(0)" onclick="go('medical');toggleMob()"><span class="mob-icon"><img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=120&auto=format&fit=crop&q=80" alt="Medical Tourism"></span><span>Medical Tourism</span></a>
-  <a href="javascript:void(0)" onclick="go('about');toggleMob()"><span class="mob-icon"><img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=120&auto=format&fit=crop&q=80" alt="About Us"></span><span>About Us</span></a>
-  <a href="javascript:void(0)" onclick="go('contact');toggleMob()"><span class="mob-icon"><img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=120&auto=format&fit=crop&q=80" alt="Contact"></span><span>Contact</span></a>
-</div>
+"""
+html = re.sub(
+    r'<div class="nav-links">.*?</div>\s*<button class="hbg"',
+    new_nav_links + '    <button class="hbg"',
+    html,
+    flags=re.S
+)
 
-<!-- ===== HOME ===== -->
+new_mobile = """
+<div class="mob" id="mob">
+  <a href="javascript:void(0)" onclick="go('home')"><span class="mob-icon"><img src="https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=120&auto=format&fit=crop&q=80" alt="Home"></span><span>Home</span></a>
+  <a href="javascript:void(0)" onclick="go('srilanka')"><span class="mob-icon"><img src="https://images.unsplash.com/photo-1586613835348-1f6fd12f73a5?w=120&auto=format&fit=crop&q=80" alt="Sri Lanka"></span><span>Sri Lanka Destinations</span></a>
+  <a href="javascript:void(0)" onclick="go('intl')"><span class="mob-icon"><img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=120&auto=format&fit=crop&q=80" alt="International destinations"></span><span>International Destinations</span></a>
+  <a href="javascript:void(0)" onclick="go('guide')"><span class="mob-icon"><img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=120&auto=format&fit=crop&q=80" alt="Travel guide"></span><span>Travel Guide</span></a>
+  <a href="javascript:void(0)" onclick="go('medical')"><span class="mob-icon"><img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=120&auto=format&fit=crop&q=80" alt="Medical tourism"></span><span>Medical Tourism</span></a>
+  <a href="javascript:void(0)" onclick="go('umrah')"><span class="mob-icon"><img src="https://images.unsplash.com/photo-1565552645632-d725f8bfc19a?w=120&auto=format&fit=crop&q=80" alt="Umrah"></span><span>Umrah</span></a>
+  <a href="javascript:void(0)" onclick="go('about')"><span class="mob-icon"><img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=120&auto=format&fit=crop&q=80" alt="About us"></span><span>About Us</span></a>
+  <a href="javascript:void(0)" onclick="go('reviews')"><span class="mob-icon"><img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=120&auto=format&fit=crop&q=80" alt="Testimonials"></span><span>Testimonials</span></a>
+  <a href="javascript:void(0)" onclick="go('contact')"><span class="mob-icon"><img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=120&auto=format&fit=crop&q=80" alt="Contact"></span><span>Contact</span></a>
+</div>
+"""
+html = re.sub(r'<div class="mob" id="mob">.*?</div>\s*\n\s*<!-- ===== HOME ===== -->',
+              new_mobile + '\n<!-- ===== HOME ===== -->', html, flags=re.S)
+
+# ---------- ADDITIONAL CSS ----------
+extra_css = """
+/* COMPLETE WEBSITE EXTENSIONS */
+.hero .hcnt{max-width:760px;margin-left:max(2rem,calc((100vw - 1300px)/2));margin-right:auto}
+.hero-mini-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2rem;max-width:760px}
+.hero-mini{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.18);padding:1rem;border-radius:14px;backdrop-filter:blur(8px)}
+.hero-mini strong{display:block;color:#fff;font-size:.9rem;margin-bottom:.2rem}
+.hero-mini span{color:rgba(255,255,255,.65);font-size:.76rem}
+.info-banner{display:grid;grid-template-columns:1.15fr .85fr;min-height:520px}
+.info-copy{padding:5rem max(2rem,calc((100vw - 1300px)/2));background:linear-gradient(135deg,#0B2A3D,#154C5A);color:#fff}
+.info-copy h2{font-size:clamp(2rem,4vw,3.8rem);margin-bottom:1.2rem}
+.info-copy p{font-size:1rem;line-height:1.8;color:rgba(255,255,255,.82);max-width:700px}
+.info-image{min-height:420px;background-size:cover;background-position:center}
+.two-col-section{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+.photo-stack{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.photo-stack img{height:220px;width:100%;object-fit:cover;border-radius:16px}
+.photo-stack img:first-child{grid-column:1/-1;height:260px}
+.service-list{display:grid;grid-template-columns:repeat(2,1fr);gap:.9rem 1.5rem;margin-top:1.7rem}
+.service-item{display:flex;gap:.75rem;align-items:flex-start;color:var(--mid);font-weight:600}
+.service-item::before{content:'››';color:#F59E0B;font-size:1.5rem;line-height:1;font-weight:800}
+.dest-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2rem}
+.dest-tile{position:relative;height:260px;border-radius:18px;overflow:hidden;box-shadow:0 10px 26px rgba(16,42,67,.12);cursor:pointer}
+.dest-tile img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.dest-tile:hover img{transform:scale(1.06)}
+.dest-tile::after{content:'';position:absolute;inset:0;background:linear-gradient(transparent,rgba(5,20,33,.82))}
+.dest-tile div{position:absolute;left:1.1rem;bottom:1rem;z-index:2;color:#fff}
+.dest-tile h3{font-size:1.25rem;margin-bottom:.2rem}
+.dest-tile p{font-size:.75rem;color:rgba(255,255,255,.72)}
+.guide-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2rem}
+.guide-card{background:#fff;border-radius:18px;padding:1.6rem;box-shadow:0 8px 26px rgba(16,42,67,.09);border-top:4px solid var(--gold)}
+.guide-card img{width:52px;height:52px;object-fit:cover;border-radius:12px;margin-bottom:1rem}
+.guide-card h3{font-size:1.1rem;margin-bottom:.55rem}
+.guide-card p{font-size:.84rem;color:var(--muted);line-height:1.65}
+.umrah-hero{background:linear-gradient(90deg,rgba(5,25,38,.9),rgba(5,25,38,.55)),url('https://images.unsplash.com/photo-1565552645632-d725f8bfc19a?w=1800&auto=format&fit=crop&q=80') center/cover}
+.package-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2rem}
+.package-card{background:#fff;border-radius:18px;padding:1.7rem;box-shadow:0 9px 28px rgba(16,42,67,.1);border:1px solid rgba(197,163,90,.25)}
+.package-card .tag{display:inline-block;background:var(--teal-pl);color:var(--teal);font-size:.68rem;padding:.3rem .65rem;border-radius:20px;margin-bottom:1rem;font-weight:700}
+.package-card h3{font-size:1.25rem;margin-bottom:.75rem}
+.package-card ul{display:grid;gap:.6rem}
+.package-card li{font-size:.84rem;color:var(--mid)}
+.package-card li::before{content:'✓';color:var(--gold-dk);font-weight:800;margin-right:.5rem}
+.review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2rem}
+.review-card{background:#fff;border-radius:18px;padding:1.6rem;box-shadow:0 10px 30px rgba(16,42,67,.1);position:relative}
+.review-card::before{content:'“';font-family:Georgia,serif;font-size:4rem;color:rgba(197,163,90,.25);position:absolute;right:1rem;top:.2rem}
+.stars{color:#C58A4C;letter-spacing:.15em;margin-bottom:.8rem}
+.review-card p{color:var(--mid);font-size:.86rem;line-height:1.7;margin-bottom:1rem}
+.review-card strong{display:block;color:var(--dk)}
+.review-card span{font-size:.76rem;color:var(--muted)}
+.founder-card{background:linear-gradient(135deg,#0D5F6D,#0B2A3D);border-radius:22px;padding:2.2rem;color:#fff}
+.founder-card p{font-size:1rem;line-height:1.8;color:rgba(255,255,255,.87)}
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1.7rem}
+.stat{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.13);padding:1rem;border-radius:12px;text-align:center}
+.stat strong{display:block;font-size:1.35rem;color:var(--gold-lt)}
+.stat span{font-size:.72rem;color:rgba(255,255,255,.65)}
+@media(max-width:960px){
+  .info-banner,.two-col-section{grid-template-columns:1fr}
+  .dest-grid{grid-template-columns:repeat(2,1fr)}
+  .guide-grid,.package-grid,.review-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:640px){
+  .hero-mini-grid,.service-list,.dest-grid,.guide-grid,.package-grid,.review-grid,.stat-row{grid-template-columns:1fr}
+  .info-copy{padding:3.5rem 1.2rem}
+  .dest-tile{height:230px}
+}
+"""
+html = html.replace("</style>", extra_css + "\n</style>")
+
+# ---------- HOME PAGE ----------
+home = r"""
 <div id="p-home" class="page active">
   <div class="hero">
-    <div class="hbg2" id="hbg2" style="background-image:url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1800&auto=format&fit=crop&q=72')"></div>
+    <div class="hbg2" id="hbg2" style="background-image:url('https://images.unsplash.com/photo-1586613835348-1f6fd12f73a5?w=1800&auto=format&fit=crop&q=82')"></div>
     <div class="hgrad"></div>
     <div class="hcnt">
-      <div class="ey">&#10022; Your Trusted Travel Partner in Sri Lanka and Beyond</div>
-      <h1>Creating Memorable Journeys with <em>Professional Excellence</em></h1>
-      <p class="hsub">Specializing in inbound tourism, medical tourism, and outbound travel solutions.</p>
+      <div class="ey">Sri Lanka • Medical Tourism • Global Holidays • Umrah</div>
+      <h1>Your Gateway to <em>Sri Lanka and the World</em></h1>
+      <p class="hsub">Wingspro Holidays creates seamless, personalized journeys for leisure travelers, families, groups, corporate clients, medical travelers, and pilgrims.</p>
       <div class="hbtns">
-        <button class="bgold" onclick="go('srilanka')">Explore Sri Lanka &#10022;</button>
-        <button class="bgh" onclick="go('contact')">Get Free Quote</button>
+        <button class="bgold" onclick="go('srilanka')">Explore Sri Lanka</button>
+        <button class="bgh" onclick="go('contact')">Plan My Journey</button>
+      </div>
+      <div class="hero-mini-grid">
+        <div class="hero-mini"><strong>Destination Management</strong><span>Complete Sri Lanka travel planning</span></div>
+        <div class="hero-mini"><strong>Medical Travel</strong><span>Coordinated care and recovery support</span></div>
+        <div class="hero-mini"><strong>Umrah Services</strong><span>Comfortable pilgrimage arrangements</span></div>
       </div>
     </div>
-    <div class="scroll-h">SCROLL</div>
   </div>
 
-  <!-- Strip -->
-  <div class="strip"><div class="strip-in">
-    <div class="si" onclick="go('srilanka')"><div class="si-ico"><img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=200&auto=format&fit=crop&q=80" alt="Sri Lanka destination management"></div><h4>Destination Management</h4><p>Sri Lanka Tours</p></div>
-    <div class="si" onclick="go('intl')"><div class="si-ico"><img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=200&auto=format&fit=crop&q=80" alt="Global holidays"></div><h4>Global Holidays</h4><p>Outbound travel</p></div>
-    <div class="si" onclick="go('medical')"><div class="si-ico"><img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=200&auto=format&fit=crop&q=80" alt="Medical tourism"></div><h4>Medical Tourism</h4><p>Quality & Affordable</p></div>
-  </div></div>
-
-  <!-- Featured Destinations -->
   <section style="background:var(--cream)"><div class="cnt">
     <div class="sh rv">
       <div>
-        <div class="slbl">Featured Destinations</div>
-        <h2 class="stit">Where Will You Go Next?</h2>
-        <p class="ssub">Curated journeys for individuals, families, groups, and corporate clients.</p>
+        <div class="slbl">Our Travel Services</div>
+        <h2 class="stit">One Trusted Partner for Every Journey</h2>
+        <p class="ssub">From Sri Lanka holidays to international tours, healthcare travel and Umrah, we manage every detail with care.</p>
       </div>
-      <button class="bgold" onclick="go('srilanka')">All Destinations</button>
     </div>
     <div class="cards">
-      <div class="card rv d1">
-        <div class="cimg"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSl4QOuDj0BzAOI2WVyr7OE6cj7WMBWzqT0bJXSwO1dYQ&s=10" alt="Sigiriya Rock Fortress Sri Lanka aerial view" loading="lazy"><div class="cbadge">Sigiriya</div></div>
-        <div class="cbody"><h3>Sigiriya &amp; Dambulla</h3><p>Cultural tours showcasing the best of Sri Lanka's heritage.</p><div class="cft"><div class="ccta" onclick="go('contact')">Enquire Now</div></div></div>
-      </div>
-      <div class="card rv d2">
-        <div class="cimg"><img src="https://afar.brightspotcdn.com/dims4/default/5896a05/2147483647/strip/false/crop/3000x2247+0+0/resize/1486x1113!/quality/90/?url=https%3A%2F%2Fk3-prod-afar-media.s3.us-west-2.amazonaws.com%2Fbrightspot%2Fb2%2Ff4%2F9a1ebe3f427f8e5eb937f8df8998%2Ftravelguides-maldives-videomediastudioeurope-shutterstock.jpg" alt="Maldives overwater bungalow" loading="lazy"><div class="cbadge">Island Escapes</div></div>
-        <div class="cbody"><h3>Maldives &amp; Mauritius</h3><p>Breathtaking outbound travel destinations for your ultimate island escape.</p><div class="cft"><div class="ccta" onclick="go('contact')">Enquire Now</div></div></div>
-      </div>
-      <div class="card rv d3">
-        <div class="cimg"><img src="https://images.unsplash.com/photo-1604922824961-d00f8cd5e60b?w=680&auto=format&fit=crop&q=78" alt="Yala Safari" loading="lazy"><div class="cbadge">Yala</div></div>
-        <div class="cbody"><h3>Yala Wildlife Safaris</h3><p>Experience authentic nature and wildlife tours designed by our local experts.</p><div class="cft"><div class="ccta" onclick="go('contact')">Enquire Now</div></div></div>
-      </div>
+      <div class="card rv d1"><div class="cimg"><img src="https://images.unsplash.com/photo-1586613835348-1f6fd12f73a5?w=900&auto=format&fit=crop&q=80" alt="Sri Lanka"><div class="cbadge">Inbound</div></div><div class="cbody"><h3>Sri Lanka Holidays</h3><p>Tailor-made cultural, wildlife, beach, honeymoon and adventure experiences across the island.</p><div class="ccta" onclick="go('srilanka')">Explore Sri Lanka</div></div></div>
+      <div class="card rv d2"><div class="cimg"><img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=900&auto=format&fit=crop&q=80" alt="International travel"><div class="cbadge">Outbound</div></div><div class="cbody"><h3>International Holidays</h3><p>Island escapes, Far East Asia, the Middle East, Turkey and customized global itineraries.</p><div class="ccta" onclick="go('intl')">View Destinations</div></div></div>
+      <div class="card rv d3"><div class="cimg"><img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=900&auto=format&fit=crop&q=80" alt="Medical tourism"><div class="cbadge">Healthcare</div></div><div class="cbody"><h3>Medical Tourism</h3><p>Hospital coordination, appointments, transport, accommodation, family support and recovery stays.</p><div class="ccta" onclick="go('medical')">Medical Travel Support</div></div></div>
+      <div class="card rv d4"><div class="cimg"><img src="https://images.unsplash.com/photo-1565552645632-d725f8bfc19a?w=900&auto=format&fit=crop&q=80" alt="Umrah"><div class="cbadge">Pilgrimage</div></div><div class="cbody"><h3>Umrah Packages</h3><p>Carefully arranged pilgrimage packages with flights, accommodation, transfers and guided assistance.</p><div class="ccta" onclick="go('umrah')">Explore Umrah</div></div></div>
     </div>
   </div></section>
 
-  <!-- Parallax -->
-  <div class="par" style="background-image:url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=1600&auto=format&fit=crop&q=70')">
-    <div class="pov"></div>
-    <div class="pcnt rv"><h2>Personalized Service &amp; Professional Expertise.</h2><p>Connecting travelers with unforgettable destinations through trusted partnerships.</p></div>
-  </div>
-
-  <!-- Why Us -->
-  <section><div class="cnt">
-    <div style="text-align:center;max-width:570px;margin:0 auto 1rem" class="rv"><div class="slbl">Why Choose Us</div><h2 class="stit">Travel with Wingspro Holidays</h2></div>
-    <div class="wgrid">
-      <div class="wi rv d1"><div class="wico"><img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=160&auto=format&fit=crop&q=80" alt="Personalized travel service"></div><h4>Personalized Service</h4><p>Every journey is designed according to the traveler's preferences and requirements.</p></div>
-      <div class="wi rv d2"><div class="wico"><img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=160&auto=format&fit=crop&q=80" alt="Professional expertise"></div><h4>Professional Expertise</h4><p>Practical experience in tourism management, destination planning, and customer service.</p></div>
-      <div class="wi rv d3"><div class="wico"><img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=160&auto=format&fit=crop&q=80" alt="Reliable travel partners"></div><h4>Reliable Travel Partners</h4><p>Trusted hotels, transport providers, and travel suppliers ensuring quality service delivery.</p></div>
-      <div class="wi rv d4"><div class="wico"><img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=160&auto=format&fit=crop&q=80" alt="Competitive pricing"></div><h4>Competitive Pricing</h4><p>Value-driven travel solutions without compromising quality.</p></div>
-      <div class="wi rv d1"><div class="wico"><img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=160&auto=format&fit=crop&q=80" alt="Medical tourism support"></div><h4>Medical Tourism Expertise</h4><p>Dedicated support for international patients and accompanying family members.</p></div>
-      <div class="wi rv d2"><div class="wico"><img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=160&auto=format&fit=crop&q=80" alt="End-to-end travel management"></div><h4>End-to-End Travel Management</h4><p>From planning to departure, we manage every aspect of the travel experience.</p></div>
+  <section><div class="cnt two-col-section">
+    <div class="rv">
+      <div class="slbl">Why Wingspro Holidays</div>
+      <h2 class="stit">Professional Service, Personal Attention</h2>
+      <p class="ssub">We combine local expertise, reliable partnerships and complete travel management to make every journey comfortable and memorable.</p>
+      <div class="service-list">
+        <div class="service-item">Personalized Service</div>
+        <div class="service-item">Professional Expertise</div>
+        <div class="service-item">Reliable Travel Partners</div>
+        <div class="service-item">Competitive Pricing</div>
+        <div class="service-item">Medical Tourism Expertise</div>
+        <div class="service-item">End-to-End Management</div>
+      </div>
+    </div>
+    <div class="photo-stack rv d2">
+      <img src="https://images.unsplash.com/photo-1586613835348-1f6fd12f73a5?w=1000&auto=format&fit=crop&q=80" alt="Sri Lanka coast">
+      <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=600&auto=format&fit=crop&q=80" alt="Travel experience">
+      <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=600&auto=format&fit=crop&q=80" alt="Holiday journey">
     </div>
   </div></section>
 
-  <div class="ctaband rv"><h2>Your Journey Starts Today</h2><p>Experience seamless, comfortable, and memorable travel.</p><button class="bwh" onclick="go('contact')">Plan My Trip &#10022;</button></div>
+  <div class="ctaband"><h2>Ready to Start Your Journey?</h2><p>Tell us where you want to go and our team will build the right travel plan for you.</p><button class="bwh" onclick="go('contact')">Request a Free Consultation</button></div>
 </div>
+"""
 
-<!-- ===== SRI LANKA (INBOUND) ===== -->
+# Replace home page block
+html = re.sub(r'<div id="p-home" class="page active">.*?<!-- ===== SRI LANKA \(INBOUND\) ===== -->',
+              home + '\n<!-- ===== SRI LANKA (INBOUND) ===== -->', html, flags=re.S)
+
+# ---------- SRI LANKA PAGE ----------
+srilanka = r"""
 <div id="p-srilanka" class="page">
-  <div class="ph"><div class="phbg" style="background-image:url('https://images.unsplash.com/photo-1587474260584-136574528ed5?w=1600&auto=format&fit=crop&q=75')"></div><div class="phov"></div>
-  <div class="phcnt"><div class="bc">Home &#8250; <span>Sri Lanka</span></div><h1>Sri Lanka Destination Management</h1><p>Showcasing the best of Sri Lanka's culture, heritage, wildlife, nature, and hospitality.</p></div></div>
-  
-  <section style="background:var(--cream)"><div class="cnt">
-    <div class="slbl rv">Key Destinations &amp; Services</div>
-    <div class="wgrid" style="margin-bottom: 3rem;">
-        <div class="wi rv d1"><h4>Key Destinations</h4><p style="font-size:0.85rem">Colombo, Kandy, Sigiriya, Dambulla, Ella, Nuwara Eliya, Yala, Bentota, Galle, Mirissa, Trincomalee, Arugam Bay.</p></div>
-        <div class="wi rv d2"><h4>Transport Services</h4><p style="font-size:0.85rem">Airport Transfers, Private Transportation, and Chauffeur Guide Services.</p></div>
-        <div class="wi rv d3"><h4>Tour Types</h4><p style="font-size:0.85rem">Tailor-Made Holidays, Cultural Tours, Wildlife Safaris, Beach Holidays, Adventure Tours, Group &amp; Corporate Travel.</p></div>
+  <div class="ph"><div class="phbg" style="background-image:url('https://images.unsplash.com/photo-1586613835348-1f6fd12f73a5?w=1800&auto=format&fit=crop&q=82')"></div><div class="phov"></div>
+  <div class="phcnt"><div class="bc">Home › <span>Sri Lanka</span></div><h1>Sri Lanka Destination Management</h1><p>Authentic journeys across culture, heritage, wildlife, beaches, mountains and local hospitality.</p></div></div>
+
+  <section style="background:var(--cream)"><div class="cnt two-col-section">
+    <div class="rv">
+      <div class="slbl">Inbound Tourism</div><h2 class="stit">Our Sri Lanka Services</h2>
+      <div class="service-list">
+        <div class="service-item">Hotel Reservations</div><div class="service-item">Wildlife Safaris</div>
+        <div class="service-item">Airport Transfers</div><div class="service-item">Beach Holidays</div>
+        <div class="service-item">Private Transportation</div><div class="service-item">Adventure Tours</div>
+        <div class="service-item">Chauffeur Guide Services</div><div class="service-item">Honeymoon Packages</div>
+        <div class="service-item">Tailor-Made Packages</div><div class="service-item">Group Tours</div>
+        <div class="service-item">Cultural Tours</div><div class="service-item">Corporate Travel</div>
+      </div>
+    </div>
+    <div class="imain rv d2"><img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1000&auto=format&fit=crop&q=82" alt="Sri Lanka beach and palm trees"></div>
+  </div></section>
+
+  <section><div class="cnt">
+    <div class="slbl rv">Key Destinations</div><h2 class="stit rv">Discover the Best of Sri Lanka</h2>
+    <div class="dest-grid">
+      <div class="dest-tile rv"><img src="https://images.unsplash.com/photo-1586613835348-1f6fd12f73a5?w=700&auto=format&fit=crop&q=80" alt="Sigiriya"><div><h3>Sigiriya</h3><p>Ancient rock fortress</p></div></div>
+      <div class="dest-tile rv d1"><img src="https://images.unsplash.com/photo-1546708973-b339540b5162?w=700&auto=format&fit=crop&q=80" alt="Kandy"><div><h3>Kandy</h3><p>Culture and heritage</p></div></div>
+      <div class="dest-tile rv d2"><img src="https://images.unsplash.com/photo-1591017403286-fd8493524e1e?w=700&auto=format&fit=crop&q=80" alt="Ella"><div><h3>Ella</h3><p>Mountains and tea country</p></div></div>
+      <div class="dest-tile rv d3"><img src="https://images.unsplash.com/photo-1604922824961-d00f8cd5e60b?w=700&auto=format&fit=crop&q=80" alt="Yala"><div><h3>Yala</h3><p>Wildlife safari</p></div></div>
+      <div class="dest-tile rv"><img src="https://images.unsplash.com/photo-1540202404-a2f29016b523?w=700&auto=format&fit=crop&q=80" alt="Galle"><div><h3>Galle</h3><p>Fort and coastal charm</p></div></div>
+      <div class="dest-tile rv d1"><img src="https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?w=700&auto=format&fit=crop&q=80" alt="Mirissa"><div><h3>Mirissa</h3><p>Beach and whale watching</p></div></div>
+      <div class="dest-tile rv d2"><img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=700&auto=format&fit=crop&q=80" alt="Nuwara Eliya"><div><h3>Nuwara Eliya</h3><p>Cool climate and tea estates</p></div></div>
+      <div class="dest-tile rv d3"><img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=700&auto=format&fit=crop&q=80" alt="Bentota"><div><h3>Bentota</h3><p>Beach holidays and water sports</p></div></div>
     </div>
   </div></section>
-  <div class="ctaband rv"><h2>Planning a Sri Lanka Trip?</h2><p>Let us design an authentic travel experience just for you.</p><button class="bwh" onclick="go('contact')">Get a Free Quote &#10022;</button></div>
+  <div class="ctaband"><h2>Plan Your Sri Lanka Holiday</h2><p>Choose your destinations and let us create a personalized island itinerary.</p><button class="bwh" onclick="go('contact')">Build My Sri Lanka Tour</button></div>
 </div>
+"""
+html = re.sub(r'<div id="p-srilanka" class="page">.*?<!-- ===== INTERNATIONAL / OUTBOUND ===== -->',
+              srilanka + '\n<!-- ===== INTERNATIONAL / OUTBOUND ===== -->', html, flags=re.S)
 
-<!-- ===== INTERNATIONAL / OUTBOUND ===== -->
+# ---------- INTERNATIONAL PAGE ----------
+intl = r"""
 <div id="p-intl" class="page">
-  <div class="ph"><div class="phbg" style="background-image:url('https://images.unsplash.com/photo-1488085061387-422e29b40080?w=1600&auto=format&fit=crop&q=75')"></div><div class="phov"></div>
-  <div class="phcnt"><div class="bc">Home &#8250; <span>Global Holidays</span></div><h1>Outbound Travel Destinations</h1><p>Connecting travelers with unforgettable destinations through trusted partnerships.</p></div></div>
+  <div class="ph"><div class="phbg" style="background-image:url('https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=1800&auto=format&fit=crop&q=82')"></div><div class="phov"></div>
+  <div class="phcnt"><div class="bc">Home › <span>International</span></div><h1>International Travel Destinations</h1><p>Customized holidays, honeymoon escapes, group tours and corporate journeys across the world.</p></div></div>
   <section style="background:var(--cream)"><div class="cnt">
-    <div class="slbl rv">Our Destinations</div>
+    <div class="slbl rv">Outbound Travel</div><h2 class="stit rv">Explore the World with Wingspro</h2>
     <div class="cards">
-      <div class="card rv d1">
-        <div class="cimg"><img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=680&auto=format&fit=crop&q=78" alt="Bali" loading="lazy"></div>
-        <div class="cbody"><h3>Island Escapes</h3><p>Maldives, Mauritius, Seychelles, and Bali.</p><div class="cft"><div class="ccta" onclick="go('contact')">Explore</div></div></div>
-      </div>
-      <div class="card rv d2">
-        <div class="cimg"><img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=680&auto=format&fit=crop&q=78" alt="Asia" loading="lazy"></div>
-        <div class="cbody"><h3>Far East Asia</h3><p>Thailand, Malaysia, China, Cambodia, Philippines, and Vietnam.</p><div class="cft"><div class="ccta" onclick="go('contact')">Explore</div></div></div>
-      </div>
-      <div class="card rv d3">
-        <div class="cimg"><img src="https://www.easysim.global/img/1dc10c57-d205-49cf-bd8e-7dd12f71331d/uae-the-palm-jumeirah.webp?fm=webp&q=80&auto=compress%2Cformat&fit=min&crop=1920%2C1280%2C0%2C0" alt="Middle East" loading="lazy"></div>
-        <div class="cbody"><h3>Middle East</h3><p>Dubai (UAE), Oman, Saudi Arabia, Bahrain, Egypt, and Jordan.</p><div class="cft"><div class="ccta" onclick="go('contact')">Explore</div></div></div>
-      </div>
-      <div class="card rv d4">
-        <div class="cimg"><img src="https://images.unsplash.com/photo-1641128324972-af3212f0f6bd?w=680&auto=format&fit=crop&q=78" alt="Turkey" loading="lazy"></div>
-        <div class="cbody"><h3>Europe &amp; Others</h3><p>Turkey and other global destinations available upon request.</p><div class="cft"><div class="ccta" onclick="go('contact')">Explore</div></div></div>
-      </div>
+      <div class="card rv"><div class="cimg"><img src="https://images.unsplash.com/photo-1512100356356-de1b84283e18?w=800&auto=format&fit=crop&q=80" alt="Maldives"></div><div class="cbody"><h3>Island Escapes</h3><p>Maldives, Mauritius, Seychelles and Bali.</p></div></div>
+      <div class="card rv d1"><div class="cimg"><img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=800&auto=format&fit=crop&q=80" alt="Asia"></div><div class="cbody"><h3>Far East Asia</h3><p>Thailand, Malaysia, China, Cambodia, Philippines and Vietnam.</p></div></div>
+      <div class="card rv d2"><div class="cimg"><img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&auto=format&fit=crop&q=80" alt="Dubai"></div><div class="cbody"><h3>Middle East</h3><p>Dubai, Oman, Saudi Arabia, Bahrain, Egypt and Jordan.</p></div></div>
+      <div class="card rv d3"><div class="cimg"><img src="https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=800&auto=format&fit=crop&q=80" alt="Turkey"></div><div class="cbody"><h3>Europe & Beyond</h3><p>Turkey and additional destinations available on request.</p></div></div>
+    </div>
+    <div class="service-list" style="margin-top:3rem">
+      <div class="service-item">Holiday Packages</div><div class="service-item">Corporate Travel</div>
+      <div class="service-item">Honeymoon Packages</div><div class="service-item">Customized Itineraries</div>
+      <div class="service-item">Hotel Reservations</div><div class="service-item">Group Travel</div>
+      <div class="service-item">Airport Transfers</div><div class="service-item">Visa Assistance Guidance</div>
     </div>
   </div></section>
-  <div class="ctaband rv"><h2>Explore The World</h2><p>Holiday Packages, Visa Assistance Guidance, and Customized Itineraries.</p><button class="bwh" onclick="go('contact')">Contact Our Experts &#10022;</button></div>
+  <div class="ctaband"><h2>Your Next Destination Awaits</h2><p>Tell us where you want to travel and we will prepare a complete itinerary.</p><button class="bwh" onclick="go('contact')">Request an International Package</button></div>
 </div>
+"""
+html = re.sub(r'<div id="p-intl" class="page">.*?<!-- ===== MEDICAL TOURISM ===== -->',
+              intl + '\n<!-- ===== MEDICAL TOURISM ===== -->', html, flags=re.S)
 
-<!-- ===== MEDICAL TOURISM ===== -->
+# ---------- MEDICAL PAGE ----------
+medical = r"""
 <div id="p-medical" class="page">
-  <div class="ph"><div class="phbg" style="background-image:url('https://images.unsplash.com/photo-1516549655169-df83a0774514?w=1600&auto=format&fit=crop&q=75')"></div><div class="phov"></div>
-  <div class="phcnt"><div class="bc">Home &#8250; <span>Medical Tourism</span></div><h1>Medical Tourism Services</h1><p>End-to-end medical travel assistance for international patients seeking treatment in Sri Lanka.</p></div></div>
-  <section style="background:var(--cream)"><div class="cnt">
-    <div class="rv" style="max-width:700px;margin-bottom:2.65rem">
-      <div class="slbl">Healthcare Travel</div>
-      <h2 class="stit">Quality and Affordable Healthcare</h2>
-      <p style="color:var(--muted);line-height:1.75;margin-top:1rem">Sri Lanka has become an increasingly popular destination for quality and affordable healthcare. We maintain professional relationships with leading healthcare providers including Nawaloka Hospital and other recognized medical institutions to ensure reliable and efficient support throughout the treatment journey.</p>
-    </div>
-    <div class="mgrid">
-      <div class="mf rv d1"><div class="mfico"><img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=180&auto=format&fit=crop&q=80" alt="Medical appointment coordination"></div><h4>Appointment Coordination</h4><p>Medical Consultation Coordination, Hospital Appointment Arrangements, and Treatment Scheduling.</p></div>
-      <div class="mf rv d2"><div class="mfico"><img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=180&auto=format&fit=crop&q=80" alt="Airport arrival and transport"></div><h4>Arrival &amp; Transport</h4><p>Airport Meet &amp; Assist Services and safe Local Transportation.</p></div>
-      <div class="mf rv d3"><div class="mfico"><img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=180&auto=format&fit=crop&q=80" alt="Accommodation and recovery support"></div><h4>Stays &amp; Support</h4><p>Accommodation Arrangements, Patient &amp; Family Support, and Recovery Stay Planning.</p></div>
-    </div>
-  </div></section>
-  <div class="ctaband rv"><h2>Start Your Medical Journey</h2><p>Dedicated support for international patients and accompanying family members.</p><button class="bwh" onclick="go('contact')">Book a Consultation &#10022;</button></div>
-</div>
-
-<!-- ===== ABOUT ===== -->
-<div id="p-about" class="page">
-  <div class="ph"><div class="phbg" style="background-image:url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1600&auto=format&fit=crop&q=75')"></div><div class="phov"></div>
-  <div class="phcnt"><div class="bc">Home &#8250; <span>About Us</span></div><h1>About Wingspro Holidays</h1><p>Creating Memorable Journeys with Professional Excellence.</p></div></div>
-  <section style="background:var(--cream)"><div class="cnt">
-    <div class="agrid">
-      <div class="rv d1">
-        <div class="imain"><img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&auto=format&fit=crop&q=78" alt="Travel Company" loading="lazy"></div>
-      </div>
-      <div class="rv d2">
-        <div class="slbl">Company Profile</div>
-        <h2 class="stit">Your Trusted Travel Partner</h2>
-        <p style="color:var(--muted);line-height:1.75;margin:1.05rem 0">Wingspro Holidays (Private) Limited is a professional travel and destination management company specializing in inbound tourism, medical tourism, and outbound travel solutions.</p>
-        <p style="color:var(--muted);line-height:1.75;margin-bottom:1.35rem"><strong>Our Vision:</strong> To become a leading travel and destination management company recognized for delivering exceptional travel experiences, innovative solutions, and outstanding customer service.</p>
-        <p style="color:var(--muted);line-height:1.75;margin-bottom:1.35rem"><strong>Our Mission:</strong> To connect travelers with unforgettable destinations through personalized service, trusted partnerships, and professional travel management while promoting Sri Lanka as a world-class tourism destination.</p>
-        <button class="bgold" onclick="go('contact')">Contact Us &#10022;</button>
+  <div class="ph"><div class="phbg" style="background-image:url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1800&auto=format&fit=crop&q=82')"></div><div class="phov"></div>
+  <div class="phcnt"><div class="bc">Home › <span>Medical Tourism</span></div><h1>Medical Tourism in Sri Lanka</h1><p>Comfortable, affordable and coordinated healthcare travel from arrival to recovery.</p></div></div>
+  <section style="background:var(--cream)"><div class="cnt two-col-section">
+    <div class="imain rv"><img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1000&auto=format&fit=crop&q=82" alt="Medical professional"></div>
+    <div class="rv d2"><div class="slbl">What We Do</div><h2 class="stit">End-to-End Medical Travel Support</h2>
+      <p class="ssub">We help international patients and their families manage the practical details of receiving treatment in Sri Lanka.</p>
+      <div class="service-list">
+        <div class="service-item">Medical Consultation Coordination</div><div class="service-item">Airport Meet & Assist</div>
+        <div class="service-item">Hospital Appointments</div><div class="service-item">Accommodation Arrangements</div>
+        <div class="service-item">Treatment Scheduling</div><div class="service-item">Local Transportation</div>
+        <div class="service-item">Patient & Family Support</div><div class="service-item">Recovery Stay Planning</div>
       </div>
     </div>
   </div></section>
   <section><div class="cnt">
-    <div style="text-align:center;max-width:700px;margin:0 auto" class="rv">
-        <div class="slbl">Message from the Founder</div>
-        <p style="font-size: 1.1rem; line-height: 1.8; font-style: italic; color: var(--dk); margin-bottom: 2rem;">"At Wingspro Holidays, we believe travel is more than visiting destinations—it is about creating memorable experiences and meaningful connections. Our commitment is to provide every client with personalized service, professional support, and exceptional value. We look forward to welcoming travelers to Sri Lanka and helping them explore the world with confidence."</p>
-        <h4 style="font-size: 1.3rem;">MRM Shafwan</h4>
-        <p style="color: var(--teal); font-weight: 500;">Founder &amp; Managing Director</p>
-        <p style="color: var(--muted); font-size: 0.9rem; margin-top: 0.5rem;">Mobile: +94 772 727 678</p>
+    <div class="slbl rv">Healthcare Partners</div><h2 class="stit rv">Reliable Support Throughout Your Treatment Journey</h2>
+    <p class="ssub rv" style="max-width:900px">We maintain professional relationships with leading healthcare providers including Nawaloka Hospital and other recognized medical institutions to help patients receive dependable and efficient assistance.</p>
+    <div class="guide-grid">
+      <div class="guide-card rv"><img src="https://images.unsplash.com/photo-1516841273335-e39b37888115?w=160&auto=format&fit=crop&q=80" alt="Before arrival"><h3>Before Arrival</h3><p>Consultation coordination, medical documentation guidance and appointment scheduling.</p></div>
+      <div class="guide-card rv d1"><img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=160&auto=format&fit=crop&q=80" alt="During treatment"><h3>During Treatment</h3><p>Transport, accommodation, hospital coordination and support for accompanying family members.</p></div>
+      <div class="guide-card rv d2"><img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=160&auto=format&fit=crop&q=80" alt="Recovery"><h3>Recovery & Return</h3><p>Recovery-stay planning, follow-up arrangements and departure coordination.</p></div>
+    </div>
+  </div></section>
+  <div class="ctaband"><h2>Start Your Medical Journey</h2><p>Share your travel and appointment requirements with our support team.</p><button class="bwh" onclick="go('contact')">Request Medical Travel Assistance</button></div>
+</div>
+"""
+html = re.sub(r'<div id="p-medical" class="page">.*?<!-- ===== ABOUT ===== -->',
+              medical + '\n<!-- ===== ABOUT ===== -->', html, flags=re.S)
+
+# ---------- ABOUT PAGE ----------
+about = r"""
+<div id="p-about" class="page">
+  <div class="ph"><div class="phbg" style="background-image:url('https://images.unsplash.com/photo-1540202404-a2f29016b523?w=1800&auto=format&fit=crop&q=82')"></div><div class="phov"></div>
+  <div class="phcnt"><div class="bc">Home › <span>About Us</span></div><h1>About Wingspro Holidays</h1><p>A Sri Lanka-based travel and destination management company serving local and international travelers.</p></div></div>
+  <section style="background:var(--cream)"><div class="cnt two-col-section">
+    <div class="rv"><div class="slbl">Company Profile</div><h2 class="stit">Your Trusted Travel Partner</h2>
+      <p style="color:var(--mid);line-height:1.8;margin-bottom:1.1rem">Wingspro Holidays (Private) Limited specializes in inbound tourism, medical tourism, international travel and customized travel arrangements for individuals, families, groups and corporate clients.</p>
+      <p style="color:var(--mid);line-height:1.8">Through trusted relationships with hotels, transport providers, tourism partners and healthcare institutions, we deliver reliable, personalized services from arrival to departure.</p>
+    </div>
+    <div class="photo-stack rv d2">
+      <img src="https://images.unsplash.com/photo-1586613835348-1f6fd12f73a5?w=1000&auto=format&fit=crop&q=80" alt="Sigiriya">
+      <img src="https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?w=600&auto=format&fit=crop&q=80" alt="Sri Lanka beach">
+      <img src="https://images.unsplash.com/photo-1546708973-b339540b5162?w=600&auto=format&fit=crop&q=80" alt="Sri Lanka culture">
+    </div>
+  </div></section>
+  <section><div class="cnt two-col-section">
+    <div class="founder-card rv">
+      <div class="slbl" style="color:var(--gold-lt)">Vision</div>
+      <p>To become a leading travel and destination management company recognized for exceptional travel experiences, innovative solutions and outstanding customer service.</p>
+      <div class="slbl" style="color:var(--gold-lt);margin-top:1.8rem">Mission</div>
+      <p>To connect travelers with unforgettable destinations through personalized service, trusted partnerships and professional travel management while promoting Sri Lanka as a world-class tourism destination.</p>
+    </div>
+    <div class="founder-card rv d2">
+      <div class="slbl" style="color:var(--gold-lt)">Message from the Founder</div>
+      <p>“At Wingspro Holidays, we believe travel is more than visiting destinations—it is about creating memorable experiences and meaningful connections. Our commitment is to provide every client with personalized service, professional support and exceptional value.”</p>
+      <h3 style="margin-top:1.5rem;color:#fff">MRM Shafwan</h3><p style="font-size:.85rem;color:var(--gold-lt)">Founder & Managing Director</p>
+      <div class="stat-row"><div class="stat"><strong>Inbound</strong><span>Sri Lanka tours</span></div><div class="stat"><strong>Outbound</strong><span>Global holidays</span></div><div class="stat"><strong>Medical</strong><span>Healthcare travel</span></div></div>
     </div>
   </div></section>
 </div>
+"""
+html = re.sub(r'<div id="p-about" class="page">.*?<!-- ===== CONTACT ===== -->',
+              about + '\n<!-- ===== CONTACT ===== -->', html, flags=re.S)
 
-<!-- ===== CONTACT ===== -->
-<div id="p-contact" class="page">
-  <div class="ph"><div class="phbg" style="background-image:url('https://images.unsplash.com/photo-1423666639041-f56000c27a9a?w=1600&auto=format&fit=crop&q=75')"></div><div class="phov"></div>
-  <div class="phcnt"><div class="bc">Home &#8250; <span>Contact Us</span></div><h1>Get In Touch</h1><p>Your Gateway to Sri Lanka and the World.</p></div></div>
+# ---------- NEW GUIDE, UMRAH, REVIEWS ----------
+insert_point = '<!-- ===== CONTACT ===== -->'
+new_pages = r"""
+<!-- ===== TRAVEL GUIDE ===== -->
+<div id="p-guide" class="page">
+  <div class="ph"><div class="phbg" style="background-image:url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1800&auto=format&fit=crop&q=82')"></div><div class="phov"></div>
+  <div class="phcnt"><div class="bc">Home › <span>Travel Guide</span></div><h1>Travel Guide</h1><p>Helpful information to prepare for a smooth, comfortable and enjoyable journey.</p></div></div>
   <section style="background:var(--cream)"><div class="cnt">
-    <div class="cwrap">
-      <div class="rv">
-        <div class="slbl">Contact Information</div>
-        <h2 class="stit">We'd Love to Hear From You</h2>
-        <p style="color:var(--muted);line-height:1.75;margin:1rem 0 1.9rem">Contact Wingspro Holidays (Private) Limited for all your travel needs.</p>
-        <div class="cdet"><div class="cico"><img src="https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=150&auto=format&fit=crop&q=80" alt="Office location"></div><div><h4>Office Address</h4><p>55/3, Broadway, Kawdana, Dehiwala, Colombo, Sri Lanka</p></div></div>
-        <div class="cdet"><div class="cico"><img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=150&auto=format&fit=crop&q=80" alt="Phone and WhatsApp contact"></div><div><h4>Phone &amp; WhatsApp</h4><p>+94 777 974 276</p></div></div>
-        <div class="cdet"><div class="cico"><img src="https://images.unsplash.com/photo-1596526131083-e8c633c948d2?w=150&auto=format&fit=crop&q=80" alt="Email contact"></div><div><h4>Email</h4><p>sales@wingsproholidays.com</p></div></div>
-      </div>
-      <div class="rv d2">
-        <div class="fcard">
-          <h3 style="margin-bottom:1.55rem;font-size:1.32rem">Send Us a Message</h3>
-          <div class="fg2">
-            <div class="fg"><label>First Name</label><input id="firstName" name="firstName" type="text" placeholder="John" autocomplete="given-name" required></div>
-            <div class="fg"><label>Last Name</label><input id="lastName" name="lastName" type="text" placeholder="Doe" autocomplete="family-name" required></div>
-          </div>
-          <div class="fg"><label>Email Address</label><input id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required></div>
-          <div class="fg"><label>Phone / WhatsApp</label><input id="phone" name="phone" type="tel" placeholder="+94 77 000 0000" autocomplete="tel" required></div>
-          <div class="fg"><label>Type of Travel</label><select id="travelType" name="travelType" required><option value="">&#8212; Select a Category &#8212;</option><option>Sri Lanka Destination Management</option><option>Outbound Travel</option><option>Medical Tourism</option></select></div>
-          <div class="fg"><label>Your Message</label><textarea id="message" name="message" placeholder="Tell us about your trip..." required></textarea></div>
-          <button class="bsub" type="button" onclick="submitForm()">Send Enquiry &#10022;</button>
-          <div class="okmsg" id="okmsg">&#9989; Thank you! We'll reply shortly.</div>
-        </div>
-      </div>
+    <div class="slbl rv">Before You Travel</div><h2 class="stit rv">Plan with Confidence</h2>
+    <div class="guide-grid">
+      <div class="guide-card rv"><img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=160&auto=format&fit=crop&q=80" alt="Documents"><h3>Documents & Visa</h3><p>Check passport validity, visa requirements and supporting documents before departure.</p></div>
+      <div class="guide-card rv d1"><img src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?w=160&auto=format&fit=crop&q=80" alt="Weather"><h3>Weather & Best Time</h3><p>Choose travel dates according to destination climate, activities and seasonal conditions.</p></div>
+      <div class="guide-card rv d2"><img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=160&auto=format&fit=crop&q=80" alt="Money"><h3>Money & Payments</h3><p>Carry suitable payment options and understand local currency and exchange arrangements.</p></div>
+      <div class="guide-card rv"><img src="https://images.unsplash.com/photo-1495195134817-aeb325a55b65?w=160&auto=format&fit=crop&q=80" alt="Food"><h3>Food & Dietary Needs</h3><p>Inform us about halal, vegetarian, allergy-related or medical dietary requirements.</p></div>
+      <div class="guide-card rv d1"><img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=160&auto=format&fit=crop&q=80" alt="Connectivity"><h3>SIM & Connectivity</h3><p>Stay connected using suitable local SIM, roaming or airport connectivity options.</p></div>
+      <div class="guide-card rv d2"><img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=160&auto=format&fit=crop&q=80" alt="Safety"><h3>Health & Safety</h3><p>Review insurance, medicines, emergency contacts and destination-specific precautions.</p></div>
     </div>
   </div></section>
+  <div class="ctaband"><h2>Need Personal Travel Advice?</h2><p>Our team can guide you based on your destination and travel purpose.</p><button class="bwh" onclick="go('contact')">Ask Our Travel Team</button></div>
 </div>
 
-<!-- FOOTER -->
+<!-- ===== UMRAH ===== -->
+<div id="p-umrah" class="page">
+  <div class="ph umrah-hero"><div class="phov" style="background:linear-gradient(90deg,rgba(5,25,38,.7),rgba(5,25,38,.2))"></div>
+  <div class="phcnt"><div class="bc">Home › <span>Umrah</span></div><h1>Umrah Travel Services</h1><p>Carefully coordinated pilgrimage packages designed for comfort, convenience and peace of mind.</p></div></div>
+  <section style="background:var(--cream)"><div class="cnt">
+    <div class="slbl rv">Pilgrimage Support</div><h2 class="stit rv">Complete Umrah Arrangements</h2>
+    <div class="service-list">
+      <div class="service-item">Flight Reservations</div><div class="service-item">Makkah & Madinah Hotels</div>
+      <div class="service-item">Airport Transfers</div><div class="service-item">Ziyarat Coordination</div>
+      <div class="service-item">Visa Guidance</div><div class="service-item">Group Assistance</div>
+      <div class="service-item">Ground Transportation</div><div class="service-item">Customized Family Packages</div>
+    </div>
+    <div class="package-grid">
+      <div class="package-card rv"><span class="tag">Essential</span><h3>Standard Umrah</h3><ul><li>Return airfare arrangements</li><li>Comfortable hotel accommodation</li><li>Airport and intercity transfers</li><li>Basic group assistance</li></ul></div>
+      <div class="package-card rv d1"><span class="tag">Popular</span><h3>Family Umrah</h3><ul><li>Family-friendly hotel options</li><li>Flexible room arrangements</li><li>Private or shared transfers</li><li>Travel support throughout</li></ul></div>
+      <div class="package-card rv d2"><span class="tag">Premium</span><h3>Executive Umrah</h3><ul><li>Premium accommodation options</li><li>Private transportation</li><li>Personalized itinerary support</li><li>Priority assistance</li></ul></div>
+    </div>
+  </div></section>
+  <div class="ctaband"><h2>Prepare for Your Umrah Journey</h2><p>Contact us for dates, availability and a customized pilgrimage package.</p><button class="bwh" onclick="go('contact')">Request Umrah Details</button></div>
+</div>
+
+<!-- ===== TESTIMONIALS ===== -->
+<div id="p-reviews" class="page">
+  <div class="ph"><div class="phbg" style="background-image:url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1800&auto=format&fit=crop&q=82')"></div><div class="phov"></div>
+  <div class="phcnt"><div class="bc">Home › <span>Testimonials</span></div><h1>Traveler Reviews</h1><p>Experiences shared by clients who trusted Wingspro Holidays with their journeys.</p></div></div>
+  <section style="background:var(--cream)"><div class="cnt">
+    <div class="slbl rv">Client Experiences</div><h2 class="stit rv">What Our Travelers Say</h2>
+    <div class="review-grid">
+      <div class="review-card rv"><div class="stars">★★★★★</div><p>Wingspro arranged our Sri Lanka tour professionally from airport pickup to hotel stays. The itinerary was comfortable and well organized.</p><strong>Family Traveler</strong><span>Sri Lanka Holiday</span></div>
+      <div class="review-card rv d1"><div class="stars">★★★★★</div><p>The team supported us throughout our medical visit, including appointments, transport and accommodation. Their assistance reduced a lot of stress.</p><strong>International Patient</strong><span>Medical Tourism</span></div>
+      <div class="review-card rv d2"><div class="stars">★★★★★</div><p>Our honeymoon package was personalized and the hotel choices were excellent. Communication was clear before and during the trip.</p><strong>Honeymoon Couple</strong><span>International Holiday</span></div>
+      <div class="review-card rv"><div class="stars">★★★★★</div><p>We appreciated the professional planning and reliable driver service during our family tour across Kandy, Ella and Galle.</p><strong>Group Traveler</strong><span>Sri Lanka Tour</span></div>
+      <div class="review-card rv d1"><div class="stars">★★★★★</div><p>The Umrah arrangements were smooth and the support team was responsive whenever we needed help with transfers or hotel details.</p><strong>Pilgrimage Traveler</strong><span>Umrah Journey</span></div>
+      <div class="review-card rv d2"><div class="stars">★★★★★</div><p>Wingspro created a practical corporate itinerary and handled airport transfers and hotel reservations efficiently.</p><strong>Corporate Client</strong><span>Business Travel</span></div>
+    </div>
+  </div></section>
+  <div class="ctaband"><h2>Travel with Confidence</h2><p>Let our team build a journey designed around your needs.</p><button class="bwh" onclick="go('contact')">Start Planning</button></div>
+</div>
+
+"""
+html = html.replace(insert_point, new_pages + insert_point)
+
+# ---------- CONTACT PAGE IMPROVEMENTS ----------
+html = html.replace(
+    '<h1>Get In Touch</h1><p>Your Gateway to Sri Lanka and the World.</p>',
+    '<h1>Contact Wingspro Holidays</h1><p>Speak with our team about Sri Lanka holidays, international travel, medical tourism or Umrah.</p>'
+)
+html = html.replace(
+    '<option>Medical Tourism</option></select>',
+    '<option>Medical Tourism</option><option>Umrah</option><option>Travel Guide Consultation</option></select>'
+)
+
+# ---------- FOOTER ----------
+footer_new = """
 <footer>
   <div class="fin">
     <div class="fbrand">
       <div class="fbl">Wingspro<span>Holidays</span></div>
-      <p>Your Trusted Travel Partner in Sri Lanka and Beyond.</p>
+      <p>Your trusted travel partner for Sri Lanka, international holidays, medical tourism and Umrah.</p>
     </div>
-    <div class="fc"><h4>Services</h4><ul><li><a href="javascript:void(0)" onclick="go('srilanka')">Destination Management</a></li><li><a href="javascript:void(0)" onclick="go('intl')">Global Holidays</a></li><li><a href="javascript:void(0)" onclick="go('medical')">Medical Tourism</a></li></ul></div>
-    <div class="fc"><h4>Contact</h4><ul><li><a href="javascript:void(0)" onclick="go('contact')">Phone: +94 777 974 276</a></li><li><a href="javascript:void(0)" onclick="go('contact')">Email: sales@wingsproholidays.com</a></li></ul></div>
-    <div class="fc"><h4>Company</h4><ul><li><a href="javascript:void(0)" onclick="go('about')">About Us</a></li><li><a href="javascript:void(0)" onclick="go('contact')">Contact Us</a></li></ul></div>
+    <div class="fc"><h4>Travel</h4><ul><li><a href="javascript:void(0)" onclick="go('srilanka')">Sri Lanka</a></li><li><a href="javascript:void(0)" onclick="go('intl')">International</a></li><li><a href="javascript:void(0)" onclick="go('guide')">Travel Guide</a></li></ul></div>
+    <div class="fc"><h4>Specialized</h4><ul><li><a href="javascript:void(0)" onclick="go('medical')">Medical Tourism</a></li><li><a href="javascript:void(0)" onclick="go('umrah')">Umrah</a></li><li><a href="javascript:void(0)" onclick="go('reviews')">Testimonials</a></li></ul></div>
+    <div class="fc"><h4>Contact</h4><ul><li><a href="tel:+94777974276">+94 777 974 276</a></li><li><a href="mailto:sales@wingsproholidays.com">sales@wingsproholidays.com</a></li><li><a href="javascript:void(0)" onclick="go('about')">About Us</a></li></ul></div>
   </div>
   <div class="fbot">
     <p>&#169; <span id="year"></span> Wingspro Holidays (Private) Limited. All rights reserved.</p>
-    <p>&#127757; 55/3, Broadway, Kawdana, Dehiwala, Colombo, Sri Lanka</p>
+    <p>55/3, Broadway, Kawdana, Dehiwala, Colombo, Sri Lanka</p>
   </div>
 </footer>
+"""
+html = re.sub(r'<footer>.*?</footer>', footer_new, html, flags=re.S)
 
-<script>
-function go(id){
-  var mobileMenu=document.getElementById('mob');
-  if(mobileMenu)mobileMenu.classList.remove('open');
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById('p-'+id).classList.add('active');
-  document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));
-  var el=document.getElementById('n-'+id);
-  if(el)el.classList.add('active');
-  window.scrollTo({top:0,behavior:'smooth'});
-  setTimeout(initRv,80);
-  return false;
-}
-function toggleMob(){document.getElementById('mob').classList.toggle('open')}
-window.addEventListener('scroll',function(){document.getElementById('nav').classList.toggle('scrolled',scrollY>50)});
-window.addEventListener('load',function(){var b=document.getElementById('hbg2');if(b)setTimeout(function(){b.classList.add('loaded')},120)});
-function initRv(){
-  var obs=new IntersectionObserver(function(entries){
-    entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target)}});
-  },{threshold:.1,rootMargin:'0px 0px -35px 0px'});
-  document.querySelectorAll('.rv').forEach(function(el){el.classList.remove('vis');obs.observe(el)});
-}
-function submitForm(){
-  var fields=['firstName','lastName','email','phone','travelType','message'];
-  var valid=true;
+out.write_text(html, encoding="utf-8")
 
-  fields.forEach(function(id){
-    var field=document.getElementById(id);
-    if(!field || !field.checkValidity()){
-      valid=false;
-      if(field)field.reportValidity();
-    }
-  });
-
-  if(!valid)return;
-
-  var firstName=document.getElementById('firstName').value.trim();
-  var lastName=document.getElementById('lastName').value.trim();
-  var email=document.getElementById('email').value.trim();
-  var phone=document.getElementById('phone').value.trim();
-  var travelType=document.getElementById('travelType').value;
-  var message=document.getElementById('message').value.trim();
-
-  var subject=encodeURIComponent('Travel enquiry from '+firstName+' '+lastName);
-  var body=encodeURIComponent(
-    'Name: '+firstName+' '+lastName+'\n'+
-    'Email: '+email+'\n'+
-    'Phone / WhatsApp: '+phone+'\n'+
-    'Type of Travel: '+travelType+'\n\n'+
-    'Message:\n'+message
-  );
-
-  window.location.href='mailto:sales@wingsproholidays.com?subject='+subject+'&body='+body;
-
-  var m=document.getElementById('okmsg');
-  m.textContent='✅ Your email application has been opened. Please review and send your enquiry.';
-  m.style.display='block';
-  setTimeout(function(){m.style.display='none'},7000);
-}
-document.getElementById('year').textContent=new Date().getFullYear();
-initRv();
-setTimeout(initRv,350);
-</script>
-</body>
-</html>
+print(f"Created: {out}")
+print(f"Size: {out.stat().st_size:,} bytes")
