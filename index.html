@@ -264,6 +264,38 @@ footer{background:var(--dk);color:#fff;padding:4rem 2rem 2rem}
   .dest-tile{height:230px}
 }
 
+
+/* VERIFIED DESTINATION IMAGE PRESENTATION */
+.dest-tile{background:#102A43;isolation:isolate}
+.dest-tile img{display:block;width:100%;height:100%;object-fit:cover;object-position:center;filter:saturate(.96) contrast(1.02)}
+.dest-tile:hover img{transform:scale(1.045)}
+.dest-tile:nth-child(1) img{object-position:center 45%} /* Sigiriya */
+.dest-tile:nth-child(2) img{object-position:center 46%} /* Kandy */
+.dest-tile:nth-child(3) img{object-position:center 48%} /* Ella */
+.dest-tile:nth-child(4) img{object-position:center 55%} /* Yala */
+.dest-tile:nth-child(5) img{object-position:center 50%} /* Galle */
+.dest-tile:nth-child(6) img{object-position:center 52%} /* Mirissa */
+.dest-tile:nth-child(7) img{object-position:center 45%} /* Nuwara Eliya */
+.dest-tile:nth-child(8) img{object-position:center 55%} /* Bentota */
+.dest-tile::after{z-index:1;background:linear-gradient(180deg,rgba(5,20,33,.02) 35%,rgba(5,20,33,.88) 100%)}
+.dest-tile div{z-index:2;text-shadow:0 2px 8px rgba(0,0,0,.42)}
+@media(max-width:640px){
+  .dest-tile{height:245px}
+  .dest-tile img{object-position:center}
+}
+
+
+/* LOCAL IMAGE RELIABILITY FIX */
+.cimg{height:230px;background:#E9EEF2}
+.cimg img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
+.photo-stack{min-height:500px}
+.photo-stack img{display:block;width:100%;object-fit:cover;background:#E9EEF2}
+.dest-tile img{display:block;visibility:visible;opacity:1}
+@media(max-width:640px){
+  .cimg{height:215px}
+  .photo-stack{min-height:0}
+}
+
 </style>
 </head>
 <body>
@@ -292,7 +324,7 @@ footer{background:var(--dk);color:#fff;padding:4rem 2rem 2rem}
 
 <div class="mob" id="mob">
   <a href="javascript:void(0)" onclick="go('home')"><span class="mob-icon"><img src="https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=120&auto=format&fit=crop&q=80" alt="Home"></span><span>Home</span></a>
-  <a href="javascript:void(0)" onclick="go('srilanka')"><span class="mob-icon"><img src="https://images.unsplash.com/photo-1586613835348-1f6fd12f73a5?w=120&auto=format&fit=crop&q=80" alt="Sri Lanka"></span><span>Sri Lanka Destinations</span></a>
+  <a href="javascript:void(0)" onclick="go('srilanka')"><span class="mob-icon"><img src="sigiriya.jpg" alt="Sri Lanka"></span><span>Sri Lanka Destinations</span></a>
   <a href="javascript:void(0)" onclick="go('intl')"><span class="mob-icon"><img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=120&auto=format&fit=crop&q=80" alt="International destinations"></span><span>International Destinations</span></a>
   <a href="javascript:void(0)" onclick="go('guide')"><span class="mob-icon"><img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=120&auto=format&fit=crop&q=80" alt="Travel guide"></span><span>Travel Guide</span></a>
   <a href="javascript:void(0)" onclick="go('medical')"><span class="mob-icon"><img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=120&auto=format&fit=crop&q=80" alt="Medical tourism"></span><span>Medical Tourism</span></a>
@@ -333,7 +365,7 @@ footer{background:var(--dk);color:#fff;padding:4rem 2rem 2rem}
       </div>
     </div>
     <div class="cards">
-      <div class="card rv d1"><div class="cimg"><img src="https://images.unsplash.com/photo-1586613835348-1f6fd12f73a5?w=900&auto=format&fit=crop&q=80" alt="Sri Lanka"><div class="cbadge">Inbound</div></div><div class="cbody"><h3>Sri Lanka Holidays</h3><p>Tailor-made cultural, wildlife, beach, honeymoon and adventure experiences across the island.</p><div class="ccta" onclick="go('srilanka')">Explore Sri Lanka</div></div></div>
+      <div class="card rv d1"><div class="cimg"><img src="sigiriya.jpg" alt="Sri Lanka"><div class="cbadge">Inbound</div></div><div class="cbody"><h3>Sri Lanka Holidays</h3><p>Tailor-made cultural, wildlife, beach, honeymoon and adventure experiences across the island.</p><div class="ccta" onclick="go('srilanka')">Explore Sri Lanka</div></div></div>
       <div class="card rv d2"><div class="cimg"><img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=900&auto=format&fit=crop&q=80" alt="International travel"><div class="cbadge">Outbound</div></div><div class="cbody"><h3>International Holidays</h3><p>Island escapes, Far East Asia, the Middle East, Turkey and customized global itineraries.</p><div class="ccta" onclick="go('intl')">View Destinations</div></div></div>
       <div class="card rv d3"><div class="cimg"><img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=900&auto=format&fit=crop&q=80" alt="Medical tourism"><div class="cbadge">Healthcare</div></div><div class="cbody"><h3>Medical Tourism</h3><p>Hospital coordination, appointments, transport, accommodation, family support and recovery stays.</p><div class="ccta" onclick="go('medical')">Medical Travel Support</div></div></div>
       <div class="card rv d4"><div class="cimg"><img src="https://images.unsplash.com/photo-1565552645632-d725f8bfc19a?w=900&auto=format&fit=crop&q=80" alt="Umrah"><div class="cbadge">Pilgrimage</div></div><div class="cbody"><h3>Umrah Packages</h3><p>Carefully arranged pilgrimage packages with flights, accommodation, transfers and guided assistance.</p><div class="ccta" onclick="go('umrah')">Explore Umrah</div></div></div>
@@ -355,7 +387,7 @@ footer{background:var(--dk);color:#fff;padding:4rem 2rem 2rem}
       </div>
     </div>
     <div class="photo-stack rv d2">
-      <img src="https://images.unsplash.com/photo-1586613835348-1f6fd12f73a5?w=1000&auto=format&fit=crop&q=80" alt="Sri Lanka coast">
+      <img src="mirissa.jpg" alt="Sri Lanka coast">
       <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=600&auto=format&fit=crop&q=80" alt="Travel experience">
       <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=600&auto=format&fit=crop&q=80" alt="Holiday journey">
     </div>
@@ -387,15 +419,16 @@ footer{background:var(--dk);color:#fff;padding:4rem 2rem 2rem}
 
   <section><div class="cnt">
     <div class="slbl rv">Key Destinations</div><h2 class="stit rv">Discover the Best of Sri Lanka</h2>
+    <!-- Destination photos verified against their named locations; Wikimedia sources include image fallbacks. -->
     <div class="dest-grid">
-      <div class="dest-tile rv"><img src="https://images.unsplash.com/photo-1586613835348-1f6fd12f73a5?w=700&auto=format&fit=crop&q=80" alt="Sigiriya"><div><h3>Sigiriya</h3><p>Ancient rock fortress</p></div></div>
-      <div class="dest-tile rv d1"><img src="https://images.unsplash.com/photo-1546708973-b339540b5162?w=700&auto=format&fit=crop&q=80" alt="Kandy"><div><h3>Kandy</h3><p>Culture and heritage</p></div></div>
-      <div class="dest-tile rv d2"><img src="https://images.unsplash.com/photo-1591017403286-fd8493524e1e?w=700&auto=format&fit=crop&q=80" alt="Ella"><div><h3>Ella</h3><p>Mountains and tea country</p></div></div>
-      <div class="dest-tile rv d3"><img src="https://images.unsplash.com/photo-1516426122078-c23e76319801?w=700&auto=format&fit=crop&q=80" alt="Yala"><div><h3>Yala</h3><p>Wildlife safari</p></div></div>
-      <div class="dest-tile rv"><img src="https://images.unsplash.com/photo-1540202404-a2f29016b523?w=700&auto=format&fit=crop&q=80" alt="Galle"><div><h3>Galle</h3><p>Fort and coastal charm</p></div></div>
-      <div class="dest-tile rv d1"><img src="https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?w=700&auto=format&fit=crop&q=80" alt="Mirissa"><div><h3>Mirissa</h3><p>Beach and whale watching</p></div></div>
-      <div class="dest-tile rv d2"><img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=700&auto=format&fit=crop&q=80" alt="Nuwara Eliya"><div><h3>Nuwara Eliya</h3><p>Cool climate and tea estates</p></div></div>
-      <div class="dest-tile rv d3"><img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=700&auto=format&fit=crop&q=80" alt="Bentota"><div><h3>Bentota</h3><p>Beach holidays and water sports</p></div></div>
+      <div class="dest-tile rv"><img src="sigiriya.jpg" alt="Sigiriya" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=\'data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22900%22%20height%3D%22600%22%3E%0A%20%20%20%20%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20x2%3D%221%22%20y1%3D%220%22%20y2%3D%221%22%3E%0A%20%20%20%20%3Cstop%20stop-color%3D%22%230d5f6d%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23102a43%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%20%20%20%20%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22url%28%23g%29%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22720%22%20cy%3D%22120%22%20r%3D%2285%22%20fill%3D%22%23c5a35a%22%20opacity%3D%22.35%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%2248%25%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%20font-family%3D%22Arial%22%20font-size%3D%2254%22%20font-weight%3D%22700%22%3ESigiriya%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%2258%25%22%20text-anchor%3D%22middle%22%20fill%3D%22%23e9d6a3%22%20font-family%3D%22Arial%22%20font-size%3D%2225%22%3ESri%20Lanka%20Destination%3C/text%3E%0A%20%20%20%20%3C/svg%3E\'"><div><h3>Sigiriya</h3><p>Ancient rock fortress</p></div></div>
+      <div class="dest-tile rv d1"><img src="kandy.jpg" alt="Kandy" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=\'data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22900%22%20height%3D%22600%22%3E%0A%20%20%20%20%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20x2%3D%221%22%20y1%3D%220%22%20y2%3D%221%22%3E%0A%20%20%20%20%3Cstop%20stop-color%3D%22%230d5f6d%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23102a43%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%20%20%20%20%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22url%28%23g%29%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22720%22%20cy%3D%22120%22%20r%3D%2285%22%20fill%3D%22%23c5a35a%22%20opacity%3D%22.35%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%2248%25%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%20font-family%3D%22Arial%22%20font-size%3D%2254%22%20font-weight%3D%22700%22%3EKandy%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%2258%25%22%20text-anchor%3D%22middle%22%20fill%3D%22%23e9d6a3%22%20font-family%3D%22Arial%22%20font-size%3D%2225%22%3ESri%20Lanka%20Destination%3C/text%3E%0A%20%20%20%20%3C/svg%3E\'"><div><h3>Kandy</h3><p>Culture and heritage</p></div></div>
+      <div class="dest-tile rv d2"><img src="ella.jpg" alt="Ella" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=\'data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22900%22%20height%3D%22600%22%3E%0A%20%20%20%20%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20x2%3D%221%22%20y1%3D%220%22%20y2%3D%221%22%3E%0A%20%20%20%20%3Cstop%20stop-color%3D%22%230d5f6d%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23102a43%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%20%20%20%20%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22url%28%23g%29%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22720%22%20cy%3D%22120%22%20r%3D%2285%22%20fill%3D%22%23c5a35a%22%20opacity%3D%22.35%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%2248%25%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%20font-family%3D%22Arial%22%20font-size%3D%2254%22%20font-weight%3D%22700%22%3EElla%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%2258%25%22%20text-anchor%3D%22middle%22%20fill%3D%22%23e9d6a3%22%20font-family%3D%22Arial%22%20font-size%3D%2225%22%3ESri%20Lanka%20Destination%3C/text%3E%0A%20%20%20%20%3C/svg%3E\'"><div><h3>Ella</h3><p>Mountains and tea country</p></div></div>
+      <div class="dest-tile rv d3"><img src="yala.jpg" alt="Yala" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=\'data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22900%22%20height%3D%22600%22%3E%0A%20%20%20%20%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20x2%3D%221%22%20y1%3D%220%22%20y2%3D%221%22%3E%0A%20%20%20%20%3Cstop%20stop-color%3D%22%230d5f6d%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23102a43%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%20%20%20%20%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22url%28%23g%29%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22720%22%20cy%3D%22120%22%20r%3D%2285%22%20fill%3D%22%23c5a35a%22%20opacity%3D%22.35%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%2248%25%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%20font-family%3D%22Arial%22%20font-size%3D%2254%22%20font-weight%3D%22700%22%3EYala%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%2258%25%22%20text-anchor%3D%22middle%22%20fill%3D%22%23e9d6a3%22%20font-family%3D%22Arial%22%20font-size%3D%2225%22%3ESri%20Lanka%20Destination%3C/text%3E%0A%20%20%20%20%3C/svg%3E\'"><div><h3>Yala</h3><p>Wildlife safari</p></div></div>
+      <div class="dest-tile rv"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Galle%20Fort.jpg?width=900" alt="Galle" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=\'data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22900%22%20height%3D%22600%22%3E%0A%20%20%20%20%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20x2%3D%221%22%20y1%3D%220%22%20y2%3D%221%22%3E%0A%20%20%20%20%3Cstop%20stop-color%3D%22%230d5f6d%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23102a43%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%20%20%20%20%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22url%28%23g%29%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22720%22%20cy%3D%22120%22%20r%3D%2285%22%20fill%3D%22%23c5a35a%22%20opacity%3D%22.35%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%2248%25%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%20font-family%3D%22Arial%22%20font-size%3D%2254%22%20font-weight%3D%22700%22%3EGalle%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%2258%25%22%20text-anchor%3D%22middle%22%20fill%3D%22%23e9d6a3%22%20font-family%3D%22Arial%22%20font-size%3D%2225%22%3ESri%20Lanka%20Destination%3C/text%3E%0A%20%20%20%20%3C/svg%3E\'"><div><h3>Galle</h3><p>Fort and coastal charm</p></div></div>
+      <div class="dest-tile rv d1"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Mirissa-Plage%20%283%29.jpg?width=900" alt="Mirissa" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=\'data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22900%22%20height%3D%22600%22%3E%0A%20%20%20%20%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20x2%3D%221%22%20y1%3D%220%22%20y2%3D%221%22%3E%0A%20%20%20%20%3Cstop%20stop-color%3D%22%230d5f6d%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23102a43%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%20%20%20%20%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22url%28%23g%29%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22720%22%20cy%3D%22120%22%20r%3D%2285%22%20fill%3D%22%23c5a35a%22%20opacity%3D%22.35%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%2248%25%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%20font-family%3D%22Arial%22%20font-size%3D%2254%22%20font-weight%3D%22700%22%3EMirissa%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%2258%25%22%20text-anchor%3D%22middle%22%20fill%3D%22%23e9d6a3%22%20font-family%3D%22Arial%22%20font-size%3D%2225%22%3ESri%20Lanka%20Destination%3C/text%3E%0A%20%20%20%20%3C/svg%3E\'"><div><h3>Mirissa</h3><p>Beach and whale watching</p></div></div>
+      <div class="dest-tile rv d2"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/NuwaraEliya_from_top.jpg?width=900" alt="Nuwara Eliya" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=\'data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22900%22%20height%3D%22600%22%3E%0A%20%20%20%20%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20x2%3D%221%22%20y1%3D%220%22%20y2%3D%221%22%3E%0A%20%20%20%20%3Cstop%20stop-color%3D%22%230d5f6d%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23102a43%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%20%20%20%20%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22url%28%23g%29%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22720%22%20cy%3D%22120%22%20r%3D%2285%22%20fill%3D%22%23c5a35a%22%20opacity%3D%22.35%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%2248%25%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%20font-family%3D%22Arial%22%20font-size%3D%2254%22%20font-weight%3D%22700%22%3ENuwara%20Eliya%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%2258%25%22%20text-anchor%3D%22middle%22%20fill%3D%22%23e9d6a3%22%20font-family%3D%22Arial%22%20font-size%3D%2225%22%3ESri%20Lanka%20Destination%3C/text%3E%0A%20%20%20%20%3C/svg%3E\'"><div><h3>Nuwara Eliya</h3><p>Cool climate and tea estates</p></div></div>
+      <div class="dest-tile rv d3"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Sri%20Lanka%2C%20Bentota%2C%20beach%20%282%29.JPG?width=900" alt="Bentota" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=\'data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22900%22%20height%3D%22600%22%3E%0A%20%20%20%20%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20x2%3D%221%22%20y1%3D%220%22%20y2%3D%221%22%3E%0A%20%20%20%20%3Cstop%20stop-color%3D%22%230d5f6d%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23102a43%22/%3E%3C/linearGradient%3E%3C/defs%3E%0A%20%20%20%20%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22url%28%23g%29%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22720%22%20cy%3D%22120%22%20r%3D%2285%22%20fill%3D%22%23c5a35a%22%20opacity%3D%22.35%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%2248%25%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%20font-family%3D%22Arial%22%20font-size%3D%2254%22%20font-weight%3D%22700%22%3EBentota%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%2258%25%22%20text-anchor%3D%22middle%22%20fill%3D%22%23e9d6a3%22%20font-family%3D%22Arial%22%20font-size%3D%2225%22%3ESri%20Lanka%20Destination%3C/text%3E%0A%20%20%20%20%3C/svg%3E\'"><div><h3>Bentota</h3><p>Beach holidays and water sports</p></div></div>
     </div>
   </div></section>
   <div class="ctaband"><h2>Plan Your Sri Lanka Holiday</h2><p>Choose your destinations and let us create a personalized island itinerary.</p><button class="bwh" onclick="go('contact')">Build My Sri Lanka Tour</button></div>
@@ -464,7 +497,7 @@ footer{background:var(--dk);color:#fff;padding:4rem 2rem 2rem}
       <p style="color:var(--mid);line-height:1.8">Through trusted relationships with hotels, transport providers, tourism partners and healthcare institutions, we deliver reliable, personalized services from arrival to departure.</p>
     </div>
     <div class="photo-stack rv d2">
-      <img src="https://images.unsplash.com/photo-1586613835348-1f6fd12f73a5?w=1000&auto=format&fit=crop&q=80" alt="Sigiriya">
+      <img src="sigiriya.jpg" alt="Sigiriya">
       <img src="https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?w=600&auto=format&fit=crop&q=80" alt="Sri Lanka beach">
       <img src="https://images.unsplash.com/photo-1546708973-b339540b5162?w=600&auto=format&fit=crop&q=80" alt="Sri Lanka culture">
     </div>
