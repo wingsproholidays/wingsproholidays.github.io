@@ -1581,6 +1581,38 @@ section .cnt > .rv:first-child{
   #p-srilanka .sl-services-grid{grid-template-columns:1fr}
 }
 
+
+/* CONTACT SECTION ICON REPLACEMENT */
+.contact-icon{
+  width:46px;
+  height:46px;
+  min-width:46px;
+  border-radius:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(135deg,var(--teal-pl),#ffffff);
+  color:var(--teal);
+  border:1px solid rgba(31,111,120,.14);
+  box-shadow:0 8px 18px rgba(16,42,67,.08);
+  transition:all .25s ease;
+}
+.contact-icon svg{
+  width:23px;
+  height:23px;
+  stroke:currentColor;
+  fill:none;
+  stroke-width:1.9;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.cdet:hover .contact-icon{
+  background:var(--teal);
+  color:#fff;
+  transform:translateY(-2px);
+  box-shadow:0 12px 22px rgba(16,42,67,.12);
+}
+
 </style>
 </head>
 <body>
@@ -2106,9 +2138,26 @@ section .cnt > .rv:first-child{
         <div class="slbl">Contact Information</div>
         <h2 class="stit">We'd Love to Hear From You</h2>
         <p style="color:var(--muted);line-height:1.75;margin:1rem 0 1.9rem">Contact Wingspro Holidays (Private) Limited for all your travel needs.</p>
-        <div class="cdet"><div class="cico"><img src="https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=150&auto=format&fit=crop&q=80" alt="Office location"></div><div><h4>Office Address</h4><p>55/3, Broadway, Kawdana, Dehiwala, Colombo, Sri Lanka</p></div></div>
-        <div class="cdet"><div class="cico"><img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=150&auto=format&fit=crop&q=80" alt="Phone and WhatsApp contact"></div><div><h4>Phone &amp; WhatsApp</h4><p>+94 777 974 276</p></div></div>
-        <div class="cdet"><div class="cico"><img src="https://images.unsplash.com/photo-1596526131083-e8c633c948d2?w=150&auto=format&fit=crop&q=80" alt="Email contact"></div><div><h4>Email</h4><p>sales@wingsproholidays.com</p></div></div>
+        <div class="cdet">
+<div class="contact-icon" aria-hidden="true">
+  <svg viewBox="0 0 24 24">
+    <path d="M12 21s-6-4.6-6-10a6 6 0 1 1 12 0c0 5.4-6 10-6 10Z"/>
+    <circle cx="12" cy="11" r="2.5"/>
+  </svg>
+</div><div><h4>Office Address</h4><p>55/3, Broadway, Kawdana, Dehiwala, Colombo, Sri Lanka</p></div></div>
+        <div class="cdet">
+<div class="contact-icon" aria-hidden="true">
+  <svg viewBox="0 0 24 24">
+    <path d="M21 15.5v3a2 2 0 0 1-2.2 2 17.5 17.5 0 0 1-7.6-2.7A17.1 17.1 0 0 1 5.2 11 17.5 17.5 0 0 1 2.5 3.3 2 2 0 0 1 4.5 1h3a2 2 0 0 1 2 1.7l.5 3.1a2 2 0 0 1-.6 1.8L8 9a14 14 0 0 0 7 7l1.4-1.4a2 2 0 0 1 1.8-.6l3.1.5A2 2 0 0 1 21 15.5Z"/>
+  </svg>
+</div><div><h4>Phone &amp; WhatsApp</h4><p>+94 777 974 276</p></div></div>
+        <div class="cdet">
+<div class="contact-icon" aria-hidden="true">
+  <svg viewBox="0 0 24 24">
+    <rect x="3" y="5" width="18" height="14" rx="2"/>
+    <path d="m4 7 8 6 8-6"/>
+  </svg>
+</div><div><h4>Email</h4><p>sales@wingsproholidays.com</p></div></div>
       </div>
       <div class="rv d2">
         <div class="fcard">
