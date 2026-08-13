@@ -1642,7 +1642,15 @@ section .cnt > .rv:first-child{
 .pdf-terms{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:1.6rem;break-inside:avoid;page-break-inside:avoid}.pdf-term{background:#f8fafb;border-radius:12px;padding:1rem}.pdf-term h4{font-family:'Inter',sans-serif;font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;color:var(--teal);margin-bottom:.55rem}.pdf-term ul{list-style:disc;padding-left:1rem}.pdf-term li{font-size:.71rem;color:var(--mid);line-height:1.55;margin:.2rem 0}.pdf-foot{font-size:.66rem;color:var(--muted);margin-top:1.2rem;text-align:center}
 @media(max-width:980px){.itin-layout{grid-template-columns:1fr}.itin-preview-wrap{position:static}.pdf-summary{grid-template-columns:1fr 1fr 1fr}}
 @media(max-width:640px){.itin-two,.itin-dest-grid,.pdf-summary,.pdf-terms{grid-template-columns:1fr}.itin-panel{padding:1.15rem}.pdf-cover{padding:1.35rem}.pdf-body{padding:1.2rem}.pdf-day-head{display:block}.pdf-location{text-align:left;margin-top:.25rem}}
-@media print{body *{visibility:hidden!important}#itineraryDocument,#itineraryDocument *{visibility:visible!important}#itineraryDocument{position:absolute;left:0;top:0;width:100%;box-shadow:none!important;border-radius:0!important}.pdf-cover{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+@media print{body *{visibility:hidden!important}#itineraryDocument,#itineraryDocument *{visibility:visible!important}#itineraryDocument{position:absolute;left:0;top:0;width:100%;box-shadow:none!important;border-radius:0!important}.pdf-cover{-webkit-print-color-adjust:exact;print-color-adjust:exact;break-inside:avoid!important;page-break-inside:avoid!important}.pdf-brand,.pdf-summary,.pdf-day-head{break-inside:avoid!important;page-break-inside:avoid!important}}
+/* PDF EXPORT SAFETY: prevents the header/cover from being split across pages */
+#itineraryDocument .pdf-cover{break-inside:avoid;page-break-inside:avoid}
+#itineraryDocument .pdf-brand{break-inside:avoid;page-break-inside:avoid}
+.pdf-export-clone{width:196mm!important;max-width:196mm!important;margin:0!important;position:relative!important;left:auto!important;top:auto!important;transform:none!important;box-shadow:none!important;border-radius:0!important;overflow:visible!important;background:#fff!important}
+.pdf-export-clone .pdf-cover{break-inside:avoid!important;page-break-inside:avoid!important}
+.pdf-export-clone .pdf-day{break-inside:avoid!important;page-break-inside:avoid!important}
+.pdf-export-clone .pdf-terms{break-inside:avoid!important;page-break-inside:avoid!important}
+
 
 </style>
 
@@ -2789,9 +2797,62 @@ function generateSriLankaItinerary(){
   var doc=document.getElementById('itineraryDocument');doc.innerHTML=html;doc.style.display='block';document.getElementById('itinEmpty').style.display='none';
 }
 function downloadSriLankaItinerary(){
-  var doc=document.getElementById('itineraryDocument');if(!doc||doc.style.display==='none'||!doc.innerHTML.trim()){generateSriLankaItinerary();doc=document.getElementById('itineraryDocument');if(!doc.innerHTML.trim())return}
+  var doc=document.getElementById('itineraryDocument');
+  if(!doc||doc.style.display==='none'||!doc.innerHTML.trim()){
+    generateSriLankaItinerary();
+    doc=document.getElementById('itineraryDocument');
+    if(!doc||!doc.innerHTML.trim())return;
+  }
+
   var start=document.getElementById('itinStart').value||'trip';
-  if(window.html2pdf){var opt={margin:[7,7,7,7],filename:'Wingspro-Sri-Lanka-Itinerary-'+start+'.pdf',image:{type:'jpeg',quality:.98},html2canvas:{scale:2,useCORS:true,backgroundColor:'#ffffff'},jsPDF:{unit:'mm',format:'a4',orientation:'portrait'},pagebreak:{mode:['css','legacy'],avoid:['.pdf-day','.pdf-terms']}};window.html2pdf().set(opt).from(doc).save()}else{window.print()}
+
+  if(window.html2pdf){
+    /*
+      Export an isolated clone at the top-left of a temporary container.
+      html2pdf can otherwise calculate page breaks from the itinerary's
+      on-screen offset inside the sticky preview column, producing a large
+      blank first page and splitting the teal cover/header across pages.
+    */
+    var exportHost=document.createElement('div');
+    exportHost.setAttribute('aria-hidden','true');
+    exportHost.style.cssText='position:fixed;left:-100000px;top:0;width:196mm;background:#fff;z-index:-1;';
+
+    var clone=doc.cloneNode(true);
+    clone.removeAttribute('id');
+    clone.classList.add('pdf-export-clone');
+    clone.style.display='block';
+    exportHost.appendChild(clone);
+    document.body.appendChild(exportHost);
+
+    var opt={
+      margin:[7,7,7,7],
+      filename:'Wingspro-Sri-Lanka-Itinerary-'+start+'.pdf',
+      image:{type:'jpeg',quality:.98},
+      html2canvas:{
+        scale:2,
+        useCORS:true,
+        backgroundColor:'#ffffff',
+        scrollX:0,
+        scrollY:0,
+        windowWidth:1200
+      },
+      jsPDF:{unit:'mm',format:'a4',orientation:'portrait'},
+      pagebreak:{
+        mode:['css','legacy'],
+        avoid:['.pdf-cover','.pdf-brand','.pdf-day','.pdf-terms']
+      }
+    };
+
+    window.html2pdf().set(opt).from(clone).save().then(function(){
+      if(exportHost&&exportHost.parentNode)exportHost.parentNode.removeChild(exportHost);
+    }).catch(function(err){
+      if(exportHost&&exportHost.parentNode)exportHost.parentNode.removeChild(exportHost);
+      console.error('PDF export failed:',err);
+      window.print();
+    });
+  }else{
+    window.print();
+  }
 }
 (function initItinDates(){
   function run(){var a=document.getElementById('itinStart'),b=document.getElementById('itinEnd');if(!a||!b)return;var d=new Date();d.setDate(d.getDate()+14);var e=new Date(d);e.setDate(e.getDate()+5);function f(x){return x.getFullYear()+'-'+String(x.getMonth()+1).padStart(2,'0')+'-'+String(x.getDate()).padStart(2,'0')}a.value=f(d);b.value=f(e)}
