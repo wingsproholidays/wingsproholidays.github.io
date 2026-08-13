@@ -3,15 +3,56 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Wingspro Holidays (Private) Limited — Destination Management, Medical Tourism, Global Holidays.">
-<meta name="keywords" content="Wingspro Holidays, Sri Lanka travel, Medical Tourism Sri Lanka, Outbound travel, Nawaloka Hospital, Inbound tourism">
-<meta name="author" content="Wingspro Holidays">
-<meta property="og:title" content="Wingspro Holidays | Your Trusted Travel Partner">
-<meta property="og:description" content="Creating Memorable Journeys with Professional Excellence across Sri Lanka and Beyond.">
+
+<!-- Primary SEO -->
+<title>Wingspro Holidays | Sri Lanka Tours, International Holidays & Travel Services</title>
+<meta name="description" content="Wingspro Holidays offers Sri Lanka tours, international holiday packages, medical tourism, Umrah travel and personalized travel services. Plan your journey with our experienced travel team.">
+<meta name="author" content="Wingspro Holidays (Private) Limited">
+<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
+<meta name="googlebot" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
+<link rel="canonical" href="https://wingsproholidays.com/">
+
+<!-- Open Graph / social sharing -->
+<meta property="og:site_name" content="Wingspro Holidays">
+<meta property="og:title" content="Wingspro Holidays | Sri Lanka Tours & International Travel">
+<meta property="og:description" content="Sri Lanka tours, international holidays, medical tourism, Umrah travel and personalized travel planning from Wingspro Holidays.">
 <meta property="og:type" content="website">
-<meta name="robots" content="index, follow">
-<title>Wingspro Holidays | Sri Lanka Travel, Medical Tourism & Global Holidays</title>
-<link rel="icon" type="image/png" href="logo.png">
+<meta property="og:url" content="https://wingsproholidays.com/">
+<meta property="og:image" content="https://wingsproholidays.com/logo.png">
+<meta property="og:image:alt" content="Wingspro Holidays">
+
+<!-- Twitter / X cards -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Wingspro Holidays | Sri Lanka Tours & International Travel">
+<meta name="twitter:description" content="Sri Lanka tours, international holidays, medical tourism, Umrah travel and personalized travel planning.">
+<meta name="twitter:image" content="https://wingsproholidays.com/logo.png">
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="/logo.png">
+<link rel="apple-touch-icon" href="/logo.png">
+<meta name="theme-color" content="#1F6F78">
+
+<!-- Organization / TravelAgency structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TravelAgency",
+  "name": "Wingspro Holidays",
+  "legalName": "Wingspro Holidays (Private) Limited",
+  "url": "https://wingsproholidays.com/",
+  "logo": "https://wingsproholidays.com/logo.png",
+  "description": "Sri Lanka tours, international holidays, medical tourism, Umrah travel and personalized travel services.",
+  "email": "sales@wingsproholidays.com",
+  "telephone": "+94 777 974 276",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "55/3, Broadway, Kawdana",
+    "addressLocality": "Dehiwala",
+    "addressRegion": "Colombo",
+    "addressCountry": "LK"
+  }
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -1667,15 +1708,19 @@ section .cnt > .rv:first-child{
   .stit{margin-bottom:1.15rem!important;}
   .phcnt h1{margin-bottom:.95rem!important;}
 }
+
+/* SEO summary: visually hidden while remaining semantic/indexable */
+.seo-summary{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+
 </style>
 </head>
 <body>
 
 <!-- NAV -->
-<nav id="nav">
+<nav id="nav" data-nosnippet>
   <div class="nav-in">
     <div class="logo" onclick="go('home')" aria-label="Wingspro Holidays home">
-      <img src="logo.png" alt="Wingspro Holidays logo">
+      <img src="logo.png" alt="" aria-hidden="true">
     </div>
     
     <div class="nav-links">
@@ -1746,6 +1791,8 @@ section .cnt > .rv:first-child{
 <!-- ===== HOME ===== -->
 
 <div id="p-home" class="page active">
+  <!-- Keep a clear brand/service summary available to search engines for result snippets. -->
+  <p class="seo-summary">Wingspro Holidays is a Sri Lanka travel company offering tailor-made Sri Lanka tours, international holidays, medical tourism, Umrah packages and personalized travel planning.</p>
   <div class="hero">
     <div class="hbg2" id="hbg2" style="background-image:url('https://images.unsplash.com/photo-1586613835348-1f6fd12f73a5?w=1800&auto=format&fit=crop&q=82')"></div>
     <div class="hgrad"></div>
@@ -2289,11 +2336,11 @@ section .cnt > .rv:first-child{
   </div>
 </div>
 
-<footer>
+<footer data-nosnippet>
   <div class="fin">
     <div class="fbrand">
       <div class="fbl">
-        <img src="logo.png" alt="Wingspro Holidays logo">
+        <img src="logo.png" alt="" aria-hidden="true">
       </div>
       <p>Your trusted travel partner for Sri Lanka, international holidays, medical tourism and Umrah.</p>
     </div>
