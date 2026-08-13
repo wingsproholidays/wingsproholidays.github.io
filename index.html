@@ -88,7 +88,7 @@ nav.scrolled{box-shadow:0 4px 28px rgba(0,0,0,.09)}
 section{padding:5.5rem 2rem}
 .cnt{max-width:1300px;margin:0 auto}
 .slbl{font-size:.7rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-dk);margin-bottom:.65rem;display:inline-flex;align-items:center;gap:.55rem}.slbl::before{content:'';width:26px;height:2px;background:var(--gold)}
-.stit{font-size:clamp(1.72rem,3.5vw,2.65rem);color:var(--dk);line-height:1.18;margin-bottom:.85rem}
+.stit{font-size:clamp(1.72rem,3.5vw,2.65rem);color:var(--dk);line-height:1.18;margin-bottom:1.45rem}
 .ssub{font-size:.98rem;color:var(--muted);line-height:1.75;max-width:535px}
 .sh{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:2.75rem;gap:2rem;flex-wrap:wrap}
 
@@ -144,7 +144,7 @@ section{padding:5.5rem 2rem}
 .phbg{position:absolute;inset:0;background-size:cover;background-position:center}
 .phov{position:absolute;inset:0;background:linear-gradient(135deg,rgba(14,110,117,.72),rgba(22,33,62,.75))}
 .phcnt{position:relative;z-index:2;max-width:1300px;margin:0 auto;padding:0 2rem;width:100%}
-.phcnt h1{color:#fff;font-size:clamp(1.95rem,4vw,3.3rem);margin-bottom:.65rem}
+.phcnt h1{color:#fff;font-size:clamp(1.95rem,4vw,3.3rem);margin-bottom:1.15rem}
 .phcnt p{color:rgba(255,255,255,.75);font-size:1rem;max-width:490px}
 .bc{font-size:.76rem;color:rgba(255,255,255,.55);margin-bottom:.85rem}
 .bc span{color:var(--gold-lt)}
@@ -1613,6 +1613,47 @@ section .cnt > .rv:first-child{
   box-shadow:0 12px 22px rgba(16,42,67,.12);
 }
 
+
+
+/* ============================================================
+   SRI LANKA ITINERARY GENERATOR
+   ============================================================ */
+.itin-shell{background:linear-gradient(180deg,#f7f5f0 0%,#fff 100%)}
+.itin-layout{display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:2rem;align-items:start}
+.itin-panel{background:#fff;border:1px solid rgba(31,111,120,.12);border-radius:22px;padding:1.8rem;box-shadow:0 14px 38px rgba(16,42,67,.09)}
+.itin-panel h3{font-size:1.45rem;margin-bottom:.45rem}.itin-panel>p{color:var(--muted);font-size:.86rem;line-height:1.65;margin-bottom:1.4rem}
+.itin-field{margin-bottom:1.15rem}.itin-field label{display:block;font-size:.78rem;font-weight:700;color:var(--mid);margin-bottom:.42rem}
+.itin-field input,.itin-field select{width:100%;padding:.78rem .9rem;border:1.5px solid #dfe7ec;border-radius:10px;background:#fff;color:var(--dk);font:inherit;outline:none}
+.itin-field input:focus,.itin-field select:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(31,111,120,.1)}
+.itin-two{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
+.itin-dest-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.62rem;max-height:360px;overflow:auto;padding:.15rem .15rem .15rem 0}
+.itin-dest{position:relative}.itin-dest input{position:absolute;opacity:0;pointer-events:none}
+.itin-dest label{display:flex;align-items:center;gap:.7rem;padding:.75rem .8rem;border:1.5px solid #dfe7ec;border-radius:12px;cursor:pointer;transition:.22s;background:#fff;font-size:.82rem;font-weight:600;color:var(--mid)}
+.itin-dest label::before{content:'+';display:grid;place-items:center;width:25px;height:25px;border-radius:8px;background:var(--teal-pl);color:var(--teal);font-size:1rem;font-weight:800;flex:0 0 25px}
+.itin-dest input:checked+label{border-color:var(--teal);background:var(--teal-pl);color:var(--teal)}.itin-dest input:checked+label::before{content:'✓';background:var(--teal);color:#fff}
+.itin-actions{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.25rem}.itin-actions button{flex:1;min-width:160px}
+.itin-note{margin-top:1rem;font-size:.74rem;color:var(--muted);line-height:1.55}.itin-err{display:none;background:#fff1f0;color:#9f2d25;border:1px solid #f3c5c1;border-radius:10px;padding:.72rem .85rem;margin-top:.9rem;font-size:.8rem}
+.itin-preview-wrap{position:sticky;top:calc(var(--nh) + 1.2rem)}
+.itin-empty{min-height:430px;display:grid;place-items:center;text-align:center;padding:2rem;border:2px dashed rgba(31,111,120,.18);border-radius:20px;color:var(--muted)}.itin-empty strong{display:block;color:var(--dk);font-family:'Playfair Display',serif;font-size:1.35rem;margin-bottom:.4rem}
+#itineraryDocument{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 12px 34px rgba(16,42,67,.08)}
+.pdf-cover{padding:2rem 2.2rem 1.4rem;background:linear-gradient(135deg,#0d5f6d,#102a43);color:#fff}.pdf-brand{display:flex;align-items:center;justify-content:space-between;gap:1rem}.pdf-brand img{height:54px;width:auto;background:#fff;border-radius:999px;padding:.25rem .7rem}.pdf-badge{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-lt);font-weight:700}.pdf-cover h2{color:#fff;font-size:2.05rem;margin:.9rem 0 .25rem}.pdf-cover p{color:rgba(255,255,255,.75);font-size:.88rem}
+.pdf-body{padding:1.55rem 2.15rem 2rem}.pdf-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin-bottom:1.4rem}.pdf-stat{background:#f7f5f0;border-radius:10px;padding:.7rem .8rem}.pdf-stat span{display:block;color:var(--muted);font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.18rem}.pdf-stat strong{font-size:.82rem;color:var(--dk)}
+.pdf-day{padding:1.2rem 0 1.3rem;border-bottom:1px dashed #bac7d0;break-inside:avoid;page-break-inside:avoid}.pdf-day:last-of-type{border-bottom:none}.pdf-day-head{display:flex;justify-content:space-between;gap:1rem;align-items:flex-start;margin-bottom:.7rem}.pdf-day h3{font-size:1.18rem;color:var(--teal);margin:0}.pdf-location{font-size:.72rem;font-weight:800;color:var(--gold-dk);text-transform:uppercase;letter-spacing:.07em;text-align:right}.pdf-day ul{padding-left:1.15rem;list-style:disc}.pdf-day li{font-size:.78rem;line-height:1.65;color:#334e68;margin:.28rem 0}.pdf-accom{margin-top:.7rem;font-size:.78rem;font-weight:700;color:var(--dk)}
+.pdf-terms{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:1.6rem;break-inside:avoid;page-break-inside:avoid}.pdf-term{background:#f8fafb;border-radius:12px;padding:1rem}.pdf-term h4{font-family:'Inter',sans-serif;font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;color:var(--teal);margin-bottom:.55rem}.pdf-term ul{list-style:disc;padding-left:1rem}.pdf-term li{font-size:.71rem;color:var(--mid);line-height:1.55;margin:.2rem 0}.pdf-foot{font-size:.66rem;color:var(--muted);margin-top:1.2rem;text-align:center}
+@media(max-width:980px){.itin-layout{grid-template-columns:1fr}.itin-preview-wrap{position:static}.pdf-summary{grid-template-columns:1fr 1fr 1fr}}
+@media(max-width:640px){.itin-two,.itin-dest-grid,.pdf-summary,.pdf-terms{grid-template-columns:1fr}.itin-panel{padding:1.15rem}.pdf-cover{padding:1.35rem}.pdf-body{padding:1.2rem}.pdf-day-head{display:block}.pdf-location{text-align:left;margin-top:.25rem}}
+@media print{body *{visibility:hidden!important}#itineraryDocument,#itineraryDocument *{visibility:visible!important}#itineraryDocument{position:absolute;left:0;top:0;width:100%;box-shadow:none!important;border-radius:0!important}.pdf-cover{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+
+</style>
+
+<style>
+/* GLOBAL HEADING-TO-TEXT SPACING */
+.stit{margin-bottom:1.45rem!important;}
+.phcnt h1{margin-bottom:1.15rem!important;}
+@media(max-width:640px){
+  .stit{margin-bottom:1.15rem!important;}
+  .phcnt h1{margin-bottom:.95rem!important;}
+}
 </style>
 </head>
 <body>
@@ -1627,6 +1668,7 @@ section .cnt > .rv:first-child{
     <div class="nav-links">
       <a href="javascript:void(0)" onclick="go('home')" class="active" id="n-home">Home</a>
       <a href="javascript:void(0)" onclick="go('srilanka')" id="n-srilanka">Sri Lanka</a>
+      <a href="javascript:void(0)" onclick="go('itinerary')" id="n-itinerary">Itinerary Builder</a>
       <a href="javascript:void(0)" onclick="go('intl')" id="n-intl">International</a>
       <a href="javascript:void(0)" onclick="go('guide')" id="n-guide">Travel Guide</a>
       <a href="javascript:void(0)" onclick="go('medical')" id="n-medical">Medical Tourism</a>
@@ -1658,6 +1700,7 @@ section .cnt > .rv:first-child{
 <div class="mob" id="mob">
   <a href="javascript:void(0)" onclick="go('home')"><span class="mob-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M9.5 21v-6h5v6"/></svg></span><span>Home</span></a>
   <a href="javascript:void(0)" onclick="go('srilanka')"><span class="mob-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg></span><span>Sri Lanka Destinations</span></a>
+  <a href="javascript:void(0)" onclick="go('itinerary')"><span class="mob-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h14v18H5z"/><path d="M8 7h8M8 11h8M8 15h5"/></svg></span><span>Itinerary Builder</span></a>
   <a href="javascript:void(0)" onclick="go('intl')"><span class="mob-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11.5 21 4l-7.5 18-2.2-7.3L3 11.5Z"/><path d="m11.3 14.7 4.8-4.8"/></svg></span><span>International Destinations</span></a>
   <a href="javascript:void(0)" onclick="go('guide')"><span class="mob-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H11v16H6.5A2.5 2.5 0 0 0 4 21.5Z"/><path d="M20 5.5A2.5 2.5 0 0 0 17.5 3H13v16h4.5A2.5 2.5 0 0 1 20 21.5Z"/></svg></span><span>Travel Guide</span></a>
   <a href="javascript:void(0)" onclick="go('medical')"><span class="mob-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6v5h5v6h-5v7H9v-7H4V8h5Z"/></svg></span><span>Medical Tourism</span></a>
@@ -1865,6 +1908,62 @@ section .cnt > .rv:first-child{
     </div>
   </div></section>
   <div class="ctaband"><h2>Plan Your Sri Lanka Holiday</h2><p>Choose your destinations and let us create a personalized island itinerary.</p><button class="bwh" onclick="go('contact')">Build My Sri Lanka Tour</button></div>
+</div>
+
+
+<!-- ===== SRI LANKA ITINERARY GENERATOR ===== -->
+<div id="p-itinerary" class="page">
+  <div class="ph">
+    <div class="phbg" style="background-image:url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1800&auto=format&fit=crop&q=82')"></div><div class="phov"></div>
+    <div class="phcnt"><div class="bc">Home › Sri Lanka › <span>Itinerary Builder</span></div><h1>Sri Lanka Itinerary Generator</h1><p>Select your travel dates and destinations. Your personalized day-by-day Sri Lanka itinerary is created instantly and can be saved as a PDF.</p></div>
+  </div>
+
+  <section class="itin-shell"><div class="cnt">
+    <div class="sh"><div><div class="slbl rv">Plan Your Island Journey</div><h2 class="stit rv">Build a Personalized Sri Lanka Tour</h2><p class="ssub rv">Choose the dates, traveler details and places you want to visit. The planner automatically organizes them into a practical day-by-day program.</p></div></div>
+    <div class="itin-layout">
+      <div class="itin-panel rv">
+        <h3>Trip Details</h3><p>All destinations in this builder are within Sri Lanka.</p>
+        <div class="itin-two">
+          <div class="itin-field"><label for="itinStart">Start date</label><input type="date" id="itinStart"></div>
+          <div class="itin-field"><label for="itinEnd">End date</label><input type="date" id="itinEnd"></div>
+        </div>
+        <div class="itin-two">
+          <div class="itin-field"><label for="itinAdults">Adults</label><input type="number" id="itinAdults" min="1" max="30" value="2"></div>
+          <div class="itin-field"><label for="itinChildren">Children</label><input type="number" id="itinChildren" min="0" max="20" value="0"></div>
+        </div>
+        <div class="itin-two">
+          <div class="itin-field"><label for="itinArrival">Start / pickup</label><select id="itinArrival"><option>Colombo</option><option>Bandaranaike International Airport</option><option>Negombo</option><option>Mount Lavinia</option><option>Kandy</option><option>Galle</option></select></div>
+          <div class="itin-field"><label for="itinStyle">Travel style</label><select id="itinStyle"><option value="balanced">Balanced</option><option value="culture">Culture & Heritage</option><option value="nature">Nature & Scenic</option><option value="wildlife">Wildlife & Adventure</option><option value="relaxed">Relaxed</option></select></div>
+        </div>
+        <div class="itin-field"><label>Destinations to include</label>
+          <div class="itin-dest-grid" id="itinDestGrid">
+            <div class="itin-dest"><input type="checkbox" id="d-colombo" value="Colombo"><label for="d-colombo">Colombo</label></div>
+            <div class="itin-dest"><input type="checkbox" id="d-negombo" value="Negombo"><label for="d-negombo">Negombo</label></div>
+            <div class="itin-dest"><input type="checkbox" id="d-kandy" value="Kandy" checked><label for="d-kandy">Kandy</label></div>
+            <div class="itin-dest"><input type="checkbox" id="d-sigiriya" value="Sigiriya" checked><label for="d-sigiriya">Sigiriya</label></div>
+            <div class="itin-dest"><input type="checkbox" id="d-dambulla" value="Dambulla"><label for="d-dambulla">Dambulla</label></div>
+            <div class="itin-dest"><input type="checkbox" id="d-anuradhapura" value="Anuradhapura"><label for="d-anuradhapura">Anuradhapura</label></div>
+            <div class="itin-dest"><input type="checkbox" id="d-polonnaruwa" value="Polonnaruwa"><label for="d-polonnaruwa">Polonnaruwa</label></div>
+            <div class="itin-dest"><input type="checkbox" id="d-nuwara" value="Nuwara Eliya"><label for="d-nuwara">Nuwara Eliya</label></div>
+            <div class="itin-dest"><input type="checkbox" id="d-ella" value="Ella" checked><label for="d-ella">Ella</label></div>
+            <div class="itin-dest"><input type="checkbox" id="d-yala" value="Yala"><label for="d-yala">Yala</label></div>
+            <div class="itin-dest"><input type="checkbox" id="d-galle" value="Galle" checked><label for="d-galle">Galle</label></div>
+            <div class="itin-dest"><input type="checkbox" id="d-mirissa" value="Mirissa"><label for="d-mirissa">Mirissa</label></div>
+            <div class="itin-dest"><input type="checkbox" id="d-bentota" value="Bentota"><label for="d-bentota">Bentota</label></div>
+            <div class="itin-dest"><input type="checkbox" id="d-trinco" value="Trincomalee"><label for="d-trinco">Trincomalee</label></div>
+          </div>
+        </div>
+        <div class="itin-actions"><button class="bsub" type="button" onclick="generateSriLankaItinerary()">Generate Itinerary</button><button class="bgold" type="button" onclick="downloadSriLankaItinerary()">Download PDF</button></div>
+        <div class="itin-err" id="itinError"></div>
+        <div class="itin-note">The generated program is a planning draft. Driving times, attraction opening hours, ticket prices and hotel availability should be reconfirmed before final booking.</div>
+      </div>
+
+      <div class="itin-preview-wrap rv d1">
+        <div id="itinEmpty" class="itin-empty"><div><strong>Your itinerary will appear here</strong>Select your dates and Sri Lankan destinations, then choose “Generate Itinerary”.</div></div>
+        <div id="itineraryDocument" style="display:none"></div>
+      </div>
+    </div>
+  </div></section>
 </div>
 
 <!-- ===== INTERNATIONAL / OUTBOUND ===== -->
@@ -2277,6 +2376,7 @@ section .cnt > .rv:first-child{
 </footer>
 
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script>
 function go(id){
   var target=document.getElementById('p-'+id);
@@ -2638,6 +2738,65 @@ document.querySelectorAll('#p-intl .card').forEach(function(card){
     }
   });
 });
+
+
+
+/* SRI LANKA ITINERARY GENERATOR */
+var sriLankaItineraryData={
+  "Colombo":{stay:"Colombo",activities:["Explore Colombo Fort, the commercial heart of the city, with a short orientation drive.","Visit Gangaramaya Temple and the nearby Seema Malaka area.","Continue to Independence Square and enjoy an evening walk at Galle Face Green."]},
+  "Negombo":{stay:"Negombo",activities:["Enjoy a relaxed coastal introduction around Negombo Beach and lagoon.","Visit the Dutch Canal and local fishing areas for a glimpse of everyday coastal life.","Spend the evening at leisure along the beach road and seafood district."]},
+  "Kandy":{stay:"Kandy",activities:["Visit the Royal Botanical Gardens at Peradeniya, known for palms, orchids and landscaped avenues.","Visit the Temple of the Sacred Tooth Relic and explore the historic lakeside area.","Stop at Kandy View Point and, where timing permits, enjoy a traditional cultural dance performance."]},
+  "Sigiriya":{stay:"Sigiriya / Dambulla",activities:["Visit the Sigiriya Rock Fortress and explore its water gardens, fresco area and ancient palace remains.","Enjoy panoramic views of the surrounding plains from the cultural triangle region.","Later, relax at the hotel or take an optional village experience nearby."]},
+  "Dambulla":{stay:"Dambulla",activities:["Visit the Dambulla Cave Temple complex with its historic cave shrines and Buddhist murals.","Explore the surrounding cultural-triangle landscape and local produce markets.","Continue to the hotel for a relaxed evening."]},
+  "Anuradhapura":{stay:"Anuradhapura",activities:["Explore the ancient sacred city of Anuradhapura and its monumental stupas.","Visit the Sri Maha Bodhi precinct and selected monastic ruins.","Enjoy a scenic drive around ancient reservoirs and archaeological landscapes."]},
+  "Polonnaruwa":{stay:"Polonnaruwa",activities:["Explore the UNESCO-listed ancient city of Polonnaruwa.","Visit the Royal Palace area, Gal Vihara and key archaeological monuments.","Enjoy a relaxed drive through the surrounding dry-zone countryside."]},
+  "Nuwara Eliya":{stay:"Nuwara Eliya",activities:["Travel through Sri Lanka's central highlands with scenic mountain and tea-estate views.","Visit a tea plantation and factory experience, subject to operating hours.","Explore Nuwara Eliya town, Gregory Lake and the cool-climate surroundings."]},
+  "Ella":{stay:"Ella",activities:["Visit Nine Arch Bridge and enjoy the lush hill-country scenery.","Take a relaxed walk toward Little Adam's Peak or a comparable viewpoint depending on fitness and weather.","Spend the evening exploring Ella town and its mountain atmosphere."]},
+  "Yala":{stay:"Tissamaharama / Yala",activities:["Proceed to the Yala region through Sri Lanka's southern dry-zone landscapes.","Enjoy a private jeep safari in Yala National Park, subject to park conditions and permits.","Look for elephants, deer, crocodiles, birdlife and other wildlife, with leopard sightings possible but not guaranteed."]},
+  "Galle":{stay:"Galle",activities:["Walk through UNESCO-listed Galle Fort and its historic streets, ramparts and colonial-era buildings.","Visit the lighthouse area and enjoy ocean views from the fort walls.","Explore boutique shops, cafés and local craft stops before an evening at leisure."]},
+  "Mirissa":{stay:"Mirissa",activities:["Enjoy the southern coast around Mirissa and its palm-fringed beaches.","Relax on the beach or choose an optional seasonal whale-watching excursion where appropriate.","Enjoy sunset views and a relaxed coastal evening."]},
+  "Bentota":{stay:"Bentota",activities:["Relax on Bentota's broad sandy beach and resort coastline.","Choose optional water sports or a Bentota River experience depending on weather and preference.","Enjoy a leisure afternoon with time for spa, beach or hotel facilities."]},
+  "Trincomalee":{stay:"Trincomalee",activities:["Explore Trincomalee's eastern coastline and natural harbor viewpoints.","Visit Koneswaram Temple and nearby scenic coastal landmarks.","Relax at Nilaveli or Uppuveli beach depending on the selected hotel area."]}
+};
+function itinDateLabel(d){return d.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}).toUpperCase()}
+function itinDaysBetween(a,b){var ms=24*60*60*1000;return Math.floor((b-a)/ms)+1}
+function itinSelected(){return Array.prototype.slice.call(document.querySelectorAll('#itinDestGrid input:checked')).map(function(x){return x.value})}
+function itinEscape(s){return String(s).replace(/[&<>\"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[c]})}
+function generateSriLankaItinerary(){
+  var err=document.getElementById('itinError');err.style.display='none';
+  var s=document.getElementById('itinStart').value,e=document.getElementById('itinEnd').value,dests=itinSelected();
+  if(!s||!e){err.textContent='Please select both start and end dates.';err.style.display='block';return}
+  var start=new Date(s+'T12:00:00'),end=new Date(e+'T12:00:00');
+  if(end<start){err.textContent='End date must be on or after the start date.';err.style.display='block';return}
+  if(!dests.length){err.textContent='Please select at least one Sri Lanka destination.';err.style.display='block';return}
+  var days=itinDaysBetween(start,end);if(days>30){err.textContent='Please keep the automated itinerary within 30 days.';err.style.display='block';return}
+  var adults=parseInt(document.getElementById('itinAdults').value||'1',10),children=parseInt(document.getElementById('itinChildren').value||'0',10);
+  var arrival=document.getElementById('itinArrival').value,style=document.getElementById('itinStyle').options[document.getElementById('itinStyle').selectedIndex].text;
+  var assignments=Array.from({length:days},function(){return []});
+  dests.forEach(function(dest,i){assignments[Math.min(days-1,Math.floor(i*days/dests.length))].push(dest)});
+  for(var i=0;i<days;i++){if(!assignments[i].length)assignments[i].push(dests[Math.min(dests.length-1,Math.floor(i*dests.length/days))])}
+  var dayHtml='';var prev=arrival;
+  assignments.forEach(function(dayDests,i){
+    var date=new Date(start);date.setDate(start.getDate()+i);var primary=dayDests[dayDests.length-1],d=sriLankaItineraryData[primary];
+    var route=[prev].concat(dayDests.filter(function(x){return x!==prev}));var acts=[];
+    if(i===0)acts.push('Meet your chauffeur / representative and begin the Sri Lanka tour from '+arrival+'.');
+    if(route.length>1)acts.push('Proceed from '+route[0]+' towards '+route.slice(1).join(' and ')+'. Enjoy changing landscapes, local towns and scenic stops along the way.');
+    dayDests.forEach(function(x){(sriLankaItineraryData[x].activities||[]).forEach(function(a){acts.push(a)})});
+    if(i===days-1)acts.push('At the end of the touring program, continue according to your onward hotel, airport transfer or departure arrangement.');
+    var loc=route.join(' | ');dayHtml+='<div class="pdf-day"><div class="pdf-day-head"><h3>Day '+(i+1)+': '+itinDateLabel(date)+'</h3><div class="pdf-location">LOCATION: '+itinEscape(loc)+'</div></div><strong style="font-size:.75rem">Activities:</strong><ul>'+acts.map(function(a){return '<li>'+itinEscape(a)+'</li>'}).join('')+'</ul><div class="pdf-accom">Accommodation: '+itinEscape(d.stay)+' (to be confirmed)</div></div>';prev=primary;
+  });
+  var html='<div class="pdf-cover"><div class="pdf-brand"><img src="logo.png" alt="Wingspro Holidays"><div class="pdf-badge">Tour Itinerary · Sri Lanka</div></div><h2>Your Sri Lanka Journey</h2><p>Personalized itinerary prepared by Wingspro Holidays</p></div><div class="pdf-body"><div class="pdf-summary"><div class="pdf-stat"><span>Travel Dates</span><strong>'+itinEscape(itinDateLabel(start))+' – '+itinEscape(itinDateLabel(end))+'</strong></div><div class="pdf-stat"><span>Travelers</span><strong>'+adults+' Adult'+(adults===1?'':'s')+(children?(', '+children+' Child'+(children===1?'':'ren')):'')+'</strong></div><div class="pdf-stat"><span>Travel Style</span><strong>'+itinEscape(style)+'</strong></div></div>'+dayHtml+'<div class="pdf-terms"><div class="pdf-term"><h4>Includes</h4><ul><li>Private air-conditioned transportation according to the itinerary.</li><li>Chauffeur / driver support during the touring program.</li><li>Route planning and destination coordination.</li><li>Complimentary itinerary preparation by Wingspro Holidays.</li></ul></div><div class="pdf-term"><h4>The above excludes</h4><ul><li>Hotel accommodation unless separately quoted.</li><li>Meals unless specifically mentioned.</li><li>Entrance tickets, safari fees and activity charges unless quoted.</li><li>Tips to guides / chauffeurs and personal expenses.</li><li>Early check-in, late checkout, visa fees and camera/video permits.</li><li>Any service not specifically mentioned in the final quotation.</li></ul></div></div><div class="pdf-foot">Wingspro Holidays (Private) Limited · Colombo, Sri Lanka · Generated itinerary subject to final availability and operational conditions.</div></div>';
+  var doc=document.getElementById('itineraryDocument');doc.innerHTML=html;doc.style.display='block';document.getElementById('itinEmpty').style.display='none';
+}
+function downloadSriLankaItinerary(){
+  var doc=document.getElementById('itineraryDocument');if(!doc||doc.style.display==='none'||!doc.innerHTML.trim()){generateSriLankaItinerary();doc=document.getElementById('itineraryDocument');if(!doc.innerHTML.trim())return}
+  var start=document.getElementById('itinStart').value||'trip';
+  if(window.html2pdf){var opt={margin:[7,7,7,7],filename:'Wingspro-Sri-Lanka-Itinerary-'+start+'.pdf',image:{type:'jpeg',quality:.98},html2canvas:{scale:2,useCORS:true,backgroundColor:'#ffffff'},jsPDF:{unit:'mm',format:'a4',orientation:'portrait'},pagebreak:{mode:['css','legacy'],avoid:['.pdf-day','.pdf-terms']}};window.html2pdf().set(opt).from(doc).save()}else{window.print()}
+}
+(function initItinDates(){
+  function run(){var a=document.getElementById('itinStart'),b=document.getElementById('itinEnd');if(!a||!b)return;var d=new Date();d.setDate(d.getDate()+14);var e=new Date(d);e.setDate(e.getDate()+5);function f(x){return x.getFullYear()+'-'+String(x.getMonth()+1).padStart(2,'0')+'-'+String(x.getDate()).padStart(2,'0')}a.value=f(d);b.value=f(e)}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);else run();
+})();
 
 </script>
 
